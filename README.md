@@ -6,7 +6,7 @@ A premium MERN-stack spaced repetition (SRS) dashboard built to plan, log, revie
 
 ## ✨ Features
 
-### 📅 Spaced Repetition (SRS) Engine
+### 📅 Spaced Repetition Engine
 * **Next Review Calculations**: Configurable review intervals (1, 2, 3, 7, 14, 30, 60 days) to optimize long-term memory retention.
 * **Triage Sections**: Review queue divided into **Due Today**, **Over Due**, and **Upcoming** categories.
 * **Marked Done Actions**: Effortlessly update review schedules and increment solve counts in a single click.
@@ -52,7 +52,9 @@ A premium MERN-stack spaced repetition (SRS) dashboard built to plan, log, revie
 ```
 ├── backend/          # Node.js Express server code & database models
 ├── frontend/         # React SPA client code built with Vite
-└── README.md         # Documentation
+├── package.json      # Main root workspace package scripts config
+├── README.md         # Documentation
+└── .gitignore        # Excluded folder/file patterns for Git version control
 ```
 
 ### Installation & Local Setup
@@ -60,7 +62,7 @@ A premium MERN-stack spaced repetition (SRS) dashboard built to plan, log, revie
 #### 1. Clone the repository
 ```bash
 git clone https://github.com/rahulkamti11/DSA-Tracker-MERN.git
-cd dsa-tracker-react
+cd DSA-Tracker-MERN
 ```
 
 #### 2. Configure Environment Variables
@@ -81,8 +83,10 @@ VITE_API_URL=http://localhost:5000/api
 
 #### 3. Install Dependencies & Run
 
-You can manage both frontend and backend folders directly from the root workspace directory using the helper scripts configured in the root `package.json`:
+You can choose to manage both frontend and backend either from the **root workspace directory** using the root `package.json` automation scripts, or **individually** inside their respective directories.
 
+##### Option A: Running from Root (Automated)
+Run these commands from the root directory:
 * **Install all dependencies** (installs node modules for both backend and frontend):
   ```bash
   npm run install-all
@@ -91,6 +95,22 @@ You can manage both frontend and backend folders directly from the root workspac
   ```bash
   npm run dev
   ```
+
+##### Option B: Running Directories Individually (Manual)
+If you prefer running frontend and backend separately in different terminal tabs:
+* **Backend**:
+  ```bash
+  cd backend
+  npm install
+  npm run dev
+  ```
+* **Frontend**:
+  ```bash
+  cd frontend
+  npm install
+  npm run dev
+  ```
+
 Open your browser and navigate to `http://localhost:5173`.
 
 ---
