@@ -1,6 +1,6 @@
 # 📊 DSA Tracker
 
-A premium MERN-stack spaced repetition (SRS) dashboard built to plan, log, review, and master data structures and algorithms (DSA) problems. Organize curated lists, write markdown study notes, and track your daily consistency with an integrated contribution heatmap.
+DSA-Tracker is a MERN-stack based DSA Tracker with spaced repetition application built to plan, log, review, and master data structures and algorithms (DSA) problems. Organize curated lists, write markdown study notes, and track your daily consistency with an integrated contribution heatmap.
 
 ---
 
