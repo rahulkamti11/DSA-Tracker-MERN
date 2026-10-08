@@ -1,15 +1,15 @@
 export const getPlatformInfo = (name) => {
   const map = {
-    LeetCode: { short: 'LC', dot: 'bg-amber-400', text: 'text-amber-400' },
-    GFG: { short: 'GFG', dot: 'bg-emerald-400', text: 'text-emerald-400' },
-    Codeforces: { short: 'CF', dot: 'bg-blue-500', text: 'text-blue-500' },
-    HackerRank: { short: 'HR', dot: 'bg-green-500', text: 'text-green-500' },
-    CodeChef: { short: 'CC', dot: 'bg-orange-500', text: 'text-orange-500' },
-    InterviewBit: { short: 'IB', dot: 'bg-rose-500', text: 'text-rose-500' },
-    Other: { short: 'OT', dot: 'bg-slate-400', text: 'text-slate-400' },
+    LeetCode: { short: 'LC', dot: 'bg-amber-500', text: 'text-amber-600 dark:text-amber-400' },
+    GFG: { short: 'GFG', dot: 'bg-emerald-500', text: 'text-emerald-600 dark:text-emerald-400' },
+    Codeforces: { short: 'CF', dot: 'bg-blue-500', text: 'text-blue-600 dark:text-blue-400' },
+    HackerRank: { short: 'HR', dot: 'bg-green-600', text: 'text-green-600 dark:text-green-400' },
+    CodeChef: { short: 'CC', dot: 'bg-orange-500', text: 'text-orange-600 dark:text-orange-400' },
+    InterviewBit: { short: 'IB', dot: 'bg-rose-500', text: 'text-rose-600 dark:text-rose-400' },
+    Other: { short: 'OT', dot: 'bg-slate-400', text: 'text-slate-600 dark:text-slate-400' },
   };
 
-  return map[name] || { short: name.substring(0, 2).toUpperCase(), dot: 'bg-slate-400', text: 'text-slate-400' };
+  return map[name] || { short: name.substring(0, 2).toUpperCase(), dot: 'bg-slate-400', text: 'text-slate-600 dark:text-slate-400' };
 };
 
 export const getRealUrl = (problemName, platformName, currentUrl) => {

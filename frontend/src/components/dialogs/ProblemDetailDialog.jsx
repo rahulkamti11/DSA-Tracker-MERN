@@ -105,7 +105,7 @@ export default function ProblemDetailDialog({
 
           <div>
             <h3 className="text-xs font-mono tracking-widest text-slate-500 uppercase mb-3">Notes</h3>
-            <div className="bg-slate-950/60 border border-slate-800/80 p-5 rounded-xl prose prose-invert prose-sm max-w-none text-slate-300 font-mono text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: parseMd(detailModal.notes) || '<span class="text-slate-600 italic">No notes provided.</span>' }} />
+            <div className="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 p-5 rounded-xl prose dark:prose-invert prose-sm max-w-none text-slate-800 dark:text-slate-300 font-mono text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: parseMd(detailModal.notes) || '<span class="text-slate-400 dark:text-slate-600 italic">No notes provided.</span>' }} />
           </div>
 
           {detailModal.code && (
@@ -123,7 +123,7 @@ export default function ProblemDetailDialog({
                   {codeCopied ? 'Copied!' : 'Copy Code'}
                 </button>
               </div>
-              <pre className="p-4 bg-slate-950/80 border border-slate-800 rounded-xl overflow-x-auto text-xs font-mono text-slate-300 max-h-72 custom-scrollbar leading-relaxed">
+              <pre className="p-4 bg-slate-100 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl overflow-x-auto text-xs font-mono text-slate-800 dark:text-slate-300 max-h-72 custom-scrollbar leading-relaxed">
                 <code>{detailModal.code}</code>
               </pre>
             </div>

@@ -101,7 +101,7 @@ export function CustomFilterSelect({ value, onChange, options, placeholder, labe
   );
 }
 
-export function CustomHeaderSelect({ value, onChange, options, placeholder }) {
+export function CustomHeaderSelect({ value, onChange, options, placeholder, triggerWidth = 'w-24', menuWidth = 'w-32' }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -118,17 +118,17 @@ export function CustomHeaderSelect({ value, onChange, options, placeholder }) {
   const selectedOpt = options.find((option) => option.value === value);
 
   return (
-    <div className="relative inline-block text-left" ref={ref}>
+    <div className="relative inline-block text-center" ref={ref}>
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="bg-transparent border-none outline-none text-slate-500 font-mono text-[10px] uppercase tracking-widest font-bold cursor-pointer hover:text-slate-300 focus:text-slate-200 flex items-center gap-1 mx-auto"
+        className={`${triggerWidth} flex items-center justify-between gap-1 px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-950/70 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-mono text-[10px] uppercase tracking-wider font-bold transition-all cursor-pointer shadow-xs mx-auto`}
       >
-        <span>{selectedOpt ? selectedOpt.label : placeholder}</span>
-        <ChevronDown size={10} className={`text-slate-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+        <span className="truncate">{selectedOpt ? selectedOpt.label : placeholder}</span>
+        <ChevronDown size={11} className={`text-slate-400 dark:text-slate-500 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <div className="absolute left-1/2 transform -translate-x-1/2 mt-1.5 w-44 min-w-max bg-slate-950 border border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden py-1 max-h-48 overflow-y-auto custom-scrollbar">
+        <div className={`absolute left-1/2 transform -translate-x-1/2 mt-1.5 ${menuWidth} bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden py-1 max-h-48 overflow-y-auto custom-scrollbar`}>
           {options.map((option) => (
             <button
               key={option.value}
@@ -137,8 +137,8 @@ export function CustomHeaderSelect({ value, onChange, options, placeholder }) {
                 onChange(option.value);
                 setOpen(false);
               }}
-              className={`w-full text-left px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider transition-colors hover:bg-slate-800/60 ${
-                option.value === value ? 'text-sky-400 bg-sky-500/10 font-bold' : 'text-slate-400'
+              className={`w-full text-left px-2.5 py-1.5 text-[10px] font-mono uppercase tracking-wider transition-colors hover:bg-slate-100 dark:hover:bg-slate-800/60 truncate ${
+                option.value === value ? 'text-sky-600 dark:text-sky-400 bg-sky-500/10 font-bold' : 'text-slate-700 dark:text-slate-300'
               }`}
             >
               {option.label}

@@ -47,17 +47,17 @@ export default function ProblemsTab({
 
   return (
     <div className="space-y-4 animate-in fade-in">
-      <div className="bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-lg">
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div className="flex flex-col lg:flex-row gap-3 items-end w-full">
           <div className="w-full lg:flex-1 min-w-0">
             <label className="text-[10px] font-mono tracking-widest text-slate-500 uppercase mb-1.5 block">Search</label>
-            <div className="flex items-center bg-slate-950 border border-slate-800 rounded-lg px-3 focus-within:border-sky-500 transition-colors h-[38px]">
-              <Search size={16} className="text-slate-500" />
+            <div className="flex items-center bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 focus-within:border-sky-500 transition-colors h-[38px]">
+              <Search size={16} className="text-slate-400" />
               <input
                 type="text"
                 placeholder="Search..."
                 value={filters.search}
-                className="bg-transparent border-none outline-none text-sm p-2 w-full text-slate-200"
+                className="bg-transparent border-none outline-none text-sm p-2 w-full text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500"
                 onChange={(e) => setFilters({ ...filters, search: e.target.value })}
               />
             </div>
@@ -77,17 +77,17 @@ export default function ProblemsTab({
             <button
               type="button"
               onClick={() => { setPlatformDropdownOpen(!platformDropdownOpen); setTagDropdownOpen(false); }}
-              className="w-full flex items-center justify-between bg-slate-950 border border-slate-800 p-2.5 rounded-lg text-sm text-slate-350 focus:border-sky-500 transition-colors h-[38px]"
+              className="w-full flex items-center justify-between bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-2.5 rounded-lg text-sm text-slate-700 dark:text-slate-300 focus:border-sky-500 transition-colors h-[38px]"
             >
               <span className="truncate">{filters.platforms.length === 0 ? 'All Platforms' : filters.platforms.join(', ')}</span>
               <ChevronDown size={14} className={`transition-transform ${platformDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             {platformDropdownOpen && (
-              <div className="absolute left-0 mt-1 w-full bg-slate-950 border border-slate-800 rounded-lg shadow-xl z-50 p-2.5 max-h-48 overflow-y-auto custom-scrollbar space-y-2">
+              <div className="absolute left-0 mt-1 w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg shadow-xl z-50 p-2.5 max-h-48 overflow-y-auto custom-scrollbar space-y-2">
                 {['LeetCode', 'GFG', 'HackerRank', 'Codeforces', 'CodeChef', 'InterviewBit', 'Other'].map((platform) => {
                   const isSelected = filters.platforms.includes(platform);
                   return (
-                    <label key={platform} className="flex items-center gap-2 text-xs font-semibold text-slate-355 hover:text-white cursor-pointer select-none">
+                    <label key={platform} className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white cursor-pointer select-none">
                       <input
                         type="checkbox"
                         checked={isSelected}
@@ -99,7 +99,7 @@ export default function ProblemsTab({
                             return { ...prev, platforms };
                           });
                         }}
-                        className="rounded border-slate-800 bg-slate-900 text-sky-500 focus:ring-sky-500/20"
+                        className="rounded border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-sky-500 focus:ring-sky-500/20"
                       />
                       {platform}
                     </label>
@@ -114,20 +114,20 @@ export default function ProblemsTab({
             <button
               type="button"
               onClick={() => { setTagDropdownOpen(!tagDropdownOpen); setPlatformDropdownOpen(false); }}
-              className="w-full flex items-center justify-between bg-slate-950 border border-slate-800 p-2.5 rounded-lg text-sm text-slate-355 focus:border-sky-500 transition-colors h-[38px]"
+              className="w-full flex items-center justify-between bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-2.5 rounded-lg text-sm text-slate-700 dark:text-slate-300 focus:border-sky-500 transition-colors h-[38px]"
             >
               <span className="truncate">{filters.tags.length === 0 ? 'All Tags' : filters.tags.join(', ')}</span>
               <ChevronDown size={14} className={`transition-transform ${tagDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             {tagDropdownOpen && (
-              <div className="absolute left-0 mt-1 w-full bg-slate-950 border border-slate-800 rounded-lg shadow-xl z-50 p-2.5 max-h-48 overflow-y-auto custom-scrollbar space-y-2">
+              <div className="absolute left-0 mt-1 w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg shadow-xl z-50 p-2.5 max-h-48 overflow-y-auto custom-scrollbar space-y-2">
                 {allUniqueTags.length === 0 ? (
                   <div className="text-xs text-slate-500 italic p-1">No tags available</div>
                 ) : (
                   allUniqueTags.map((tag) => {
                     const isSelected = filters.tags.includes(tag);
                     return (
-                      <label key={tag} className="flex items-center gap-2 text-xs font-semibold text-slate-355 hover:text-white cursor-pointer select-none">
+                      <label key={tag} className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white cursor-pointer select-none">
                         <input
                           type="checkbox"
                           checked={isSelected}
@@ -137,7 +137,7 @@ export default function ProblemsTab({
                               return { ...prev, tags };
                             });
                           }}
-                          className="rounded border-slate-800 bg-slate-900 text-sky-500 focus:ring-sky-500/20"
+                          className="rounded border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-sky-500 focus:ring-sky-500/20"
                         />
                         {tag}
                       </label>
@@ -196,36 +196,42 @@ export default function ProblemsTab({
                 </Tooltip>
               </th>
               <th className="py-3 px-2 max-w-[200px]">Name</th>
-              <th className="py-3 px-2 w-20 text-center">
+              <th className="py-3 px-2 w-28 text-center">
                 <CustomHeaderSelect
                   value={filters.diff}
                   onChange={(val) => setFilters({ ...filters, diff: val })}
                   options={[{ value: '', label: 'Diff' }, { value: 'Easy', label: 'Easy' }, { value: 'Medium', label: 'Medium' }, { value: 'Hard', label: 'Hard' }]}
                   placeholder="Diff"
+                  triggerWidth="w-24"
+                  menuWidth="w-32"
                 />
               </th>
-              <th className="py-3 px-2 w-24 text-center">
+              <th className="py-3 px-2 w-28 text-center">
                 <CustomHeaderSelect
                   value={filters.status}
                   onChange={(val) => setFilters({ ...filters, status: val })}
                   options={[{ value: '', label: 'Status' }, { value: 'Solved', label: 'Solved' }, { value: 'Attempted', label: 'Attempted' }, { value: 'Mastered', label: 'Mastered' }]}
                   placeholder="Status"
+                  triggerWidth="w-24"
+                  menuWidth="w-32"
                 />
               </th>
               <th className="py-3 px-2 w-40 max-w-[180px]">Tags</th>
               <th className="py-3 px-2 w-24">Platforms</th>
-              <th className="py-3 px-2 w-36 whitespace-nowrap text-center">
+              <th className="py-3 px-2 w-28 whitespace-nowrap text-center">
                 <CustomHeaderSelect
                   value={dateDisplayType}
                   onChange={(val) => setDateDisplayType(val)}
                   options={[
                     { value: 'added', label: 'Date Added' },
                     { value: 'solved', label: 'Date Solved' },
-                    { value: 'mastered', label: 'Date Mastered' },
-                    { value: 'last', label: 'Date Last Solved' },
+                    { value: 'mastered', label: 'Mastered' },
+                    { value: 'last', label: 'Last Solved' },
                     { value: 'next', label: 'Next Review' },
                   ]}
-                  placeholder="Date display"
+                  placeholder="Date"
+                  triggerWidth="w-24"
+                  menuWidth="w-32"
                 />
               </th>
               <th className="py-3 px-2 text-right rounded-tr-xl w-20 whitespace-nowrap">Actions</th>
@@ -259,10 +265,10 @@ export default function ProblemsTab({
                       </div>
                     )}
                   </td>
-                  <td className="py-3 px-2 text-center">
+                  <td className="py-3 px-2 w-28 text-center">
                     <Badge color={problem.diff === 'Easy' ? 'green' : problem.diff === 'Medium' ? 'yellow' : 'red'}>{problem.diff === 'Easy' ? 'E' : problem.diff === 'Medium' ? 'M' : 'H'}</Badge>
                   </td>
-                  <td className="py-3 px-2 text-center">
+                  <td className="py-3 px-2 w-28 text-center">
                     <Badge color={problem.status === 'Solved' ? 'green' : problem.status === 'Mastered' ? 'blue' : 'yellow'}>{problem.status}</Badge>
                   </td>
                   <td className="py-3 px-2 max-w-[180px] whitespace-normal">
@@ -286,7 +292,7 @@ export default function ProblemsTab({
                       })}
                     </div>
                   </td>
-                  <td className="py-3 px-2 font-mono text-xs text-slate-400 whitespace-nowrap text-center">
+                  <td className="py-3 px-2 w-28 font-mono text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap text-center">
                     {dateDisplayType === 'added' && (formatDate(problem.date) || '—')}
                     {dateDisplayType === 'solved' && (
                       problem.status === 'Attempted'

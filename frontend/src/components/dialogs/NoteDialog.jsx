@@ -14,7 +14,7 @@ export default function NoteDialog({ noteModal, onClose, parseMd, openAddModal }
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-800 p-2 rounded-lg transition-colors"><X size={20} /></button>
         </div>
         <div className="overflow-y-auto custom-scrollbar pr-2 flex-1">
-          <div className="prose prose-invert prose-sm max-w-none text-slate-300 font-mono text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: parseMd(noteModal.notes) || '<span class="text-slate-600 italic">No notes provided.</span>' }} />
+          <div className="prose dark:prose-invert prose-sm max-w-none text-slate-800 dark:text-slate-300 font-mono text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: parseMd(noteModal.notes) || '<span class="text-slate-400 dark:text-slate-600 italic">No notes provided.</span>' }} />
         </div>
         <div className="mt-6 pt-4 border-t border-slate-800 flex justify-end">
           <button onClick={() => { onClose(); openAddModal(noteModal.id); }} className="bg-sky-500/10 text-sky-400 border border-sky-500/30 px-6 py-2 rounded-lg text-sm font-bold hover:bg-sky-500/20 transition-colors">Edit Notes</button>

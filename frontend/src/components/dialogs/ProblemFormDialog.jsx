@@ -263,29 +263,29 @@ export default function ProblemFormDialog({
 
           {addFormTab === 'notes' && (
             <div className="animate-in fade-in duration-250 flex-1 flex flex-col overflow-hidden">
-              <div className="bg-[#121621] border border-slate-800 rounded-xl overflow-hidden shadow-inner flex flex-col flex-1">
-                <div className="p-3 bg-[#181d2b] border-b border-slate-800 shrink-0">
-                  <div className="text-[10px] font-mono text-slate-500 tracking-widest mb-3 uppercase font-bold">Notes / Approach (Markdown Supported)</div>
+              <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm flex flex-col flex-1">
+                <div className="p-3 bg-slate-100/90 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shrink-0">
+                  <div className="text-[10px] font-mono text-slate-600 dark:text-slate-400 tracking-widest mb-3 uppercase font-bold">Notes / Approach (Markdown Supported)</div>
 
-                  <div className="flex justify-between items-center mb-1 gap-2 flex-wrap bg-[#151a27] p-2 rounded-xl border border-slate-800/80">
-                    <div className="flex items-center bg-slate-950 border border-slate-800 rounded-full p-0.5 gap-0.5">
-                      <button type="button" onClick={() => insertFormatting('**', '**')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-800/60 text-slate-300 rounded-full text-xs font-serif font-bold transition-colors" title="Bold">B</button>
-                      <button type="button" onClick={() => insertFormatting('*', '*')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-800/60 text-slate-300 rounded-full text-xs font-serif italic transition-colors" title="Italic">I</button>
-                      <button type="button" onClick={() => insertFormatting('`', '`')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-800/60 text-slate-300 rounded-full text-xs font-mono transition-colors" title="Inline Code">`c`</button>
-                      <button type="button" onClick={() => insertFormatting('`' + '``\n', '\n`' + '``')} className="px-2.5 h-7 flex items-center justify-center hover:bg-slate-800/60 text-slate-300 rounded-full text-[10px] font-mono transition-colors" title="Code Block">Block</button>
-                      <button type="button" onClick={() => insertFormatting('- ')} className="px-2.5 h-7 flex items-center justify-center hover:bg-slate-800/60 text-slate-300 rounded-full text-[10px] transition-colors gap-0.5" title="List item"><span className="text-sm font-bold">•</span> List</button>
-                      <button type="button" onClick={() => insertFormatting('## ')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-800/60 text-slate-300 rounded-full text-xs font-bold transition-colors" title="Header 2">H2</button>
-                      <button type="button" onClick={() => insertFormatting('**Time:** O(n) | **Space:** O(1)')} className="px-2.5 h-7 flex items-center justify-center hover:bg-slate-800/60 text-slate-300 rounded-full text-[10px] font-bold transition-colors" title="Time & Space complexity">T/S</button>
+                  <div className="flex justify-between items-center mb-1 gap-2 flex-wrap bg-white dark:bg-slate-950/80 p-2 rounded-xl border border-slate-200 dark:border-slate-800/80 shadow-sm">
+                    <div className="flex items-center bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-full p-0.5 gap-0.5">
+                      <button type="button" onClick={() => insertFormatting('**', '**')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-full text-xs font-serif font-bold transition-colors" title="Bold">B</button>
+                      <button type="button" onClick={() => insertFormatting('*', '*')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-full text-xs font-serif italic transition-colors" title="Italic">I</button>
+                      <button type="button" onClick={() => insertFormatting('`', '`')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-full text-xs font-mono transition-colors" title="Inline Code">`c`</button>
+                      <button type="button" onClick={() => insertFormatting('`' + '``\n', '\n`' + '``')} className="px-2.5 h-7 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-full text-[10px] font-mono transition-colors" title="Code Block">Block</button>
+                      <button type="button" onClick={() => insertFormatting('- ')} className="px-2.5 h-7 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-full text-[10px] transition-colors gap-0.5" title="List item"><span className="text-sm font-bold">•</span> List</button>
+                      <button type="button" onClick={() => insertFormatting('## ')} className="w-7 h-7 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-full text-xs font-bold transition-colors" title="Header 2">H2</button>
+                      <button type="button" onClick={() => insertFormatting('**Time:** O(n) | **Space:** O(1)')} className="px-2.5 h-7 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-full text-[10px] font-bold transition-colors" title="Time & Space complexity">T/S</button>
                     </div>
 
-                    <div className="flex items-center bg-slate-950 border border-slate-850 rounded-full p-0.5 gap-0.5 shrink-0">
+                    <div className="flex items-center bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-full p-0.5 gap-0.5 shrink-0">
                       <button
                         type="button"
                         onClick={() => setNotesTab('write')}
                         className={`px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
                           notesTab === 'write'
                             ? 'bg-sky-500 text-slate-950 shadow-[0_0_10px_rgba(56,189,248,0.4)]'
-                            : 'text-slate-400 hover:text-slate-200'
+                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
                         }`}
                       >
                         <Pencil size={11} /> Write
@@ -296,7 +296,7 @@ export default function ProblemFormDialog({
                         className={`px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
                           notesTab === 'preview'
                             ? 'bg-sky-500 text-slate-950 shadow-[0_0_10px_rgba(56,189,248,0.4)]'
-                            : 'text-slate-400 hover:text-slate-200'
+                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
                         }`}
                       >
                         <Eye size={11} /> Preview
@@ -305,17 +305,17 @@ export default function ProblemFormDialog({
                   </div>
                 </div>
 
-                <div className="p-4 flex-1 overflow-y-auto custom-scrollbar bg-[#121621]">
+                <div className="p-4 flex-1 overflow-y-auto custom-scrollbar bg-white dark:bg-slate-950">
                   {notesTab === 'write' ? (
                     <textarea
                       id="notes-editor"
                       value={probForm.notes}
                       onChange={(e) => setProbForm({ ...probForm, notes: e.target.value })}
-                      className="w-full h-full min-h-[200px] bg-transparent resize-none outline-none text-[13px] text-slate-300 font-mono leading-relaxed placeholder-slate-700"
+                      className="w-full h-full min-h-[200px] bg-transparent resize-none outline-none text-[13px] text-slate-800 dark:text-slate-300 font-mono leading-relaxed placeholder-slate-400 dark:placeholder-slate-700"
                       placeholder="## Approach...&#10;Use **sliding window**..."
                     />
                   ) : (
-                    <div className="prose prose-invert prose-sm max-w-none text-slate-300 font-mono text-[13px] leading-relaxed" dangerouslySetInnerHTML={{ __html: parseMd(probForm.notes) || '<span class="text-slate-600 italic">Nothing to preview.</span>' }} />
+                    <div className="prose prose-sm max-w-none text-slate-800 dark:text-slate-300 font-mono text-[13px] leading-relaxed dark:prose-invert" dangerouslySetInnerHTML={{ __html: parseMd(probForm.notes) || '<span class="text-slate-400 dark:text-slate-600 italic">Nothing to preview.</span>' }} />
                   )}
                 </div>
               </div>
@@ -325,18 +325,18 @@ export default function ProblemFormDialog({
           {addFormTab === 'code' && (
             <div className="animate-in fade-in duration-250 space-y-3 flex-1 flex flex-col overflow-hidden">
               <div className="flex justify-between items-center shrink-0">
-                <div className="border border-slate-800 bg-slate-950/30 px-3 rounded-lg text-[10px] font-mono tracking-widest text-slate-400 uppercase flex items-center h-[32px]">Code Section</div>
+                <div className="border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/30 px-3 rounded-lg text-[10px] font-mono tracking-widest text-slate-600 dark:text-slate-400 uppercase flex items-center h-[32px]">Code Section</div>
                 <CompactLanguageSelect
                   value={probForm.language || 'cpp'}
                   onChange={(value) => setProbForm({ ...probForm, language: value })}
                 />
               </div>
-              <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950 flex-1 flex flex-col">
+              <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-950 flex-1 flex flex-col shadow-sm">
                 <textarea
                   value={probForm.code || ''}
                   onChange={(e) => setProbForm({ ...probForm, code: e.target.value })}
                   placeholder="// Paste your code here..."
-                  className="w-full h-full min-h-[200px] p-4 bg-slate-950 text-slate-300 font-mono text-xs outline-none resize-none leading-relaxed custom-scrollbar flex-1"
+                  className="w-full h-full min-h-[200px] p-4 bg-transparent text-slate-800 dark:text-slate-300 font-mono text-xs outline-none resize-none leading-relaxed custom-scrollbar flex-1 placeholder-slate-400 dark:placeholder-slate-700"
                 />
               </div>
             </div>

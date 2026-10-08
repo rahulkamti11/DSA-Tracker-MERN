@@ -98,7 +98,7 @@ export default function DashboardTab({
           </h3>
           <div className="flex items-center gap-8 w-full justify-center">
             <svg viewBox="0 0 36 36" className="w-32 h-32 drop-shadow-2xl">
-              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#1e293b" strokeWidth="3" />
+              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" className="text-slate-200 dark:text-slate-800" strokeWidth="3" />
               {solved.length > 0 && (
                 <>
                   <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#10b981" strokeWidth="3" strokeDasharray={`${(diffCounts.Easy / solved.length) * 100}, 100`} />
@@ -106,12 +106,12 @@ export default function DashboardTab({
                   <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray={`${(diffCounts.Hard / solved.length) * 100}, 100`} strokeDashoffset={`-${((diffCounts.Easy + diffCounts.Medium) / solved.length) * 100}`} />
                 </>
               )}
-              <text x="18" y="20.5" className="text-sm font-bold" fill="currentColor" textAnchor="middle">{solved.length}</text>
+              <text x="18" y="20.5" className="text-sm font-bold fill-slate-800 dark:fill-slate-100" textAnchor="middle">{solved.length}</text>
             </svg>
             <div className="space-y-3 text-sm font-mono flex-1 max-w-[150px]">
-              <div className="flex items-center gap-3 bg-slate-950/50 px-3 py-1.5 rounded-md border border-slate-800"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" /> <span className="text-slate-400 w-12">EASY</span> <span className="text-emerald-400 font-bold">{diffCounts.Easy}</span></div>
-              <div className="flex items-center gap-3 bg-slate-950/50 px-3 py-1.5 rounded-md border border-slate-800"><span className="w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_8px_#f59e0b]" /> <span className="text-slate-400 w-12">MED</span> <span className="text-amber-400 font-bold">{diffCounts.Medium}</span></div>
-              <div className="flex items-center gap-3 bg-slate-950/50 px-3 py-1.5 rounded-md border border-slate-800"><span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_#ef4444]" /> <span className="text-slate-400 w-12">HARD</span> <span className="text-rose-400 font-bold">{diffCounts.Hard}</span></div>
+              <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-950/50 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-800"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" /> <span className="text-slate-600 dark:text-slate-400 w-12 font-bold">EASY</span> <span className="text-emerald-600 dark:text-emerald-400 font-bold">{diffCounts.Easy}</span></div>
+              <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-950/50 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-800"><span className="w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_8px_#f59e0b]" /> <span className="text-slate-600 dark:text-slate-400 w-12 font-bold">MED</span> <span className="text-amber-600 dark:text-amber-400 font-bold">{diffCounts.Medium}</span></div>
+              <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-950/50 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-800"><span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_#ef4444]" /> <span className="text-slate-600 dark:text-slate-400 w-12 font-bold">HARD</span> <span className="text-rose-600 dark:text-rose-400 font-bold">{diffCounts.Hard}</span></div>
             </div>
           </div>
         </div>

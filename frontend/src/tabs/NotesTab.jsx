@@ -24,7 +24,7 @@ export default function NotesTab({ active, problems, setNoteModal }) {
                 <h3 className="font-bold text-sky-400 text-lg">{problem.name}</h3>
                 <Badge color={problem.diff === 'Easy' ? 'green' : problem.diff === 'Medium' ? 'yellow' : 'red'}>{problem.diff}</Badge>
               </div>
-              <div className="prose prose-invert prose-sm max-w-none text-slate-300 line-clamp-4 mb-4 flex-1 font-mono text-xs opacity-80" dangerouslySetInnerHTML={{ __html: parseMd(problem.notes) }} />
+              <div className="prose dark:prose-invert prose-sm max-w-none text-slate-800 dark:text-slate-300 line-clamp-4 mb-4 flex-1 font-mono text-xs" dangerouslySetInnerHTML={{ __html: parseMd(problem.notes) }} />
               <button onClick={() => setNoteModal(problem)} className="self-start text-xs font-bold text-sky-400 bg-sky-500/10 px-4 py-2 rounded-lg hover:bg-sky-500/20 transition-colors">Read Full Note →</button>
             </div>
           ))}
