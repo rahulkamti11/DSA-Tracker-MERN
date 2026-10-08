@@ -20,7 +20,7 @@ export default function ProblemDetailDialog({
 
   return (
     <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in">
-      <div className="bg-[#121620] border border-slate-800 p-8 rounded-2xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl">
+      <div className="bg-slate-900 border border-slate-800 p-8 rounded-2xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl">
         <div className="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
           <div>
             <div className="flex items-center gap-3">
@@ -38,13 +38,13 @@ export default function ProblemDetailDialog({
               </p>
             )}
           </div>
-          <button onClick={onClose} className="text-slate-500 hover:text-white bg-slate-800/80 p-2 rounded-lg transition-colors">
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-800/80 p-2 rounded-lg transition-colors">
             <X size={20} />
           </button>
         </div>
 
         <div className="overflow-y-auto custom-scrollbar pr-2 flex-1 space-y-6">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 font-mono text-[11px]">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 bg-slate-800/30 dark:bg-slate-950/40 p-4 rounded-xl border border-slate-700/60 dark:border-slate-800/60 font-mono text-[11px]">
             <div>
               <span className="text-slate-500 uppercase tracking-wider block mb-1">Times Reviewed</span>
               <span className="text-slate-200 font-bold">{detailModal.revCount || 0} times</span>

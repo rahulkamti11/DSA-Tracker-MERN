@@ -5,7 +5,7 @@ export default function CollectionDialog({ open, onClose, newCollColor, setNewCo
 
   return (
     <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in">
-      <form onSubmit={onSubmit} className="bg-[#121620] border border-slate-800 p-6 rounded-2xl w-full max-w-md shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
+      <form onSubmit={onSubmit} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full max-w-md shadow-2xl flex flex-col">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg font-bold text-slate-100 font-sans tracking-wide">New Collection</h2>
           <button type="button" onClick={onClose} className="text-slate-500 hover:text-white transition-colors"><X size={20} /></button>
