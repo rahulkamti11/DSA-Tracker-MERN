@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-export default function Tooltip({ children, content }) {
+export default function Tooltip({ children, content, className = 'relative inline-flex' }) {
   const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState(null);
   const triggerRef = useRef(null);
@@ -54,7 +54,7 @@ export default function Tooltip({ children, content }) {
     <>
       <div
         ref={triggerRef}
-        className="relative inline-flex"
+        className={className}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

@@ -308,28 +308,35 @@ export default function App() {
       <Shell
         sidebar={(
           <Sidebar sidebarCollapsed={sidebarCollapsed} sidebarOpen={sidebarOpen}>
-            <div className={`h-[73px] flex items-center border-b border-slate-800 transition-all duration-300 shrink-0 ${
+            <div className={`h-[73px] flex items-center border-b border-slate-200 dark:border-slate-800 transition-all duration-300 shrink-0 ${
               sidebarCollapsed ? 'justify-center px-2' : 'justify-between px-6'
             }`}>
               {sidebarCollapsed ? (
-                <Tooltip content="Expand sidebar">
-                  <button className="hidden md:flex text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition-colors" onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
-                    <Menu size={20} />
+                <Tooltip content="Expand sidebar" className="relative flex w-full justify-center">
+                  <button
+                    className="w-10 h-10 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-500 dark:text-sky-400 border border-sky-500/20 flex items-center justify-center font-mono font-black text-xs transition-all hover:scale-105 active:scale-95 shadow-xs mx-auto"
+                    onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                    title="Expand sidebar"
+                  >
+                    &lt;/&gt;
                   </button>
                 </Tooltip>
               ) : (
                 <>
-                  <div>
-                    <h1 className="text-lg font-bold text-sky-400 font-mono">&lt;DSA Tracker/&gt;</h1>
-                    <p className="text-[10px] text-slate-500 mt-1 uppercase tracking-widest">{user && !user.isGuest ? user.name : 'GUEST MODE'}</p>
+                  <div className="flex items-center gap-2 min-w-0">
+                    <h1 className="text-lg font-bold text-sky-500 dark:text-sky-400 font-mono tracking-tight">&lt;DSA Tracker/&gt;</h1>
                   </div>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 shrink-0">
                     <Tooltip content="Collapse sidebar">
-                      <button className="hidden md:flex text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition-colors" onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
-                        <Menu size={20} />
+                      <button
+                        className="hidden md:flex items-center justify-center w-8 h-8 rounded-lg text-sky-500 dark:text-sky-400 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/20 font-mono font-black text-xs transition-all hover:scale-105 active:scale-95"
+                        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                        title="Collapse sidebar"
+                      >
+                        &lt;/&gt;
                       </button>
                     </Tooltip>
-                    <button className="md:hidden text-slate-400" onClick={() => setSidebarOpen(false)}><X size={20} /></button>
+                    <button className="md:hidden text-slate-400 hover:text-slate-200 p-1" onClick={() => setSidebarOpen(false)}><X size={20} /></button>
                   </div>
                 </>
               )}
@@ -341,7 +348,7 @@ export default function App() {
               <NavItem id="collections" icon={FolderHeart} label="Collections" active={view === 'collections'} sidebarCollapsed={sidebarCollapsed} onClick={setView} />
               <NavItem id="topics" icon={Tags} label="Topics" active={view === 'topics'} sidebarCollapsed={sidebarCollapsed} onClick={setView} />
               <NavItem id="notes" icon={BookOpen} label="Notes" active={view === 'notes'} sidebarCollapsed={sidebarCollapsed} onClick={setView} />
-              <div className="pt-4 mt-4 border-t border-slate-800 space-y-1">
+              <div className="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
                 <NavItem id="trash" icon={Trash2} label="Recycle Bin" alert={trash.length} active={view === 'trash'} sidebarCollapsed={sidebarCollapsed} onClick={setView} />
                 <NavItem id="settings" icon={Settings} label="Settings" active={view === 'settings'} sidebarCollapsed={sidebarCollapsed} onClick={setView} />
               </div>
@@ -351,8 +358,8 @@ export default function App() {
             {(!user || user.isGuest) && (
               <div className="p-4 border-t border-slate-200 dark:border-slate-800 shrink-0 bg-slate-100/60 dark:bg-slate-900/60">
                 {sidebarCollapsed ? (
-                  <Tooltip content="Guest Mode (Login to save progress)">
-                    <div className="w-10 h-10 mx-auto rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-500 font-black text-sm shadow-[0_0_10px_rgba(244,63,94,0.2)] animate-pulse">
+                  <Tooltip content="Guest Mode (Login to save progress)" className="relative flex w-full justify-center">
+                    <div className="w-10 h-10 mx-auto rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-500 font-black text-sm shadow-[0_0_10px_rgba(244,63,94,0.2)] animate-pulse">
                       G
                     </div>
                   </Tooltip>
