@@ -27,7 +27,7 @@ export default function ProblemFormDialog({
         <div className="flex justify-between items-center p-6 border-b border-slate-800 bg-slate-900/60 rounded-t-2xl relative shrink-0">
           <h2 className="text-xl font-bold text-slate-200 shrink-0">{probModalId ? 'Edit Problem' : 'Add Problem'}</h2>
 
-          <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center bg-slate-955 border border-slate-800 rounded-full p-1 gap-1">
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center bg-slate-950 border border-slate-800 rounded-full p-1 gap-1">
             {[
               { id: 'details', label: 'Details' },
               { id: 'notes', label: 'Notes' },
@@ -48,27 +48,26 @@ export default function ProblemFormDialog({
             ))}
           </div>
 
-          <div className="flex items-center gap-3 shrink-0 z-10">
-            {addFormTab !== 'code' ? (
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 z-10">
+            {addFormTab !== 'code' && (
               <button
                 type="button"
                 onClick={() => {
                   if (addFormTab === 'details') setAddFormTab('notes');
                   else if (addFormTab === 'notes') setAddFormTab('code');
                 }}
-                className="px-5 py-2 text-xs font-black text-slate-955 bg-sky-500 hover:bg-sky-400 rounded-lg transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] animate-in fade-in"
+                className="px-3.5 py-2 text-xs font-bold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-colors"
               >
-                Next
-              </button>
-            ) : (
-              <button
-                type="submit"
-                form="problem-form"
-                className="px-5 py-2 text-xs font-black text-slate-955 bg-sky-500 hover:bg-sky-400 rounded-lg transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] animate-in fade-in"
-              >
-                Save
+                Next &rarr;
               </button>
             )}
+            <button
+              type="submit"
+              form="problem-form"
+              className="px-5 py-2 text-xs font-black text-slate-950 bg-sky-500 hover:bg-sky-400 rounded-lg transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] animate-in fade-in"
+            >
+              Save
+            </button>
             <button
               type="button"
               onClick={onClose}
@@ -174,7 +173,7 @@ export default function ProblemFormDialog({
                   <div className="flex justify-between items-center mb-1.5">
                     <label className="text-[10px] font-mono tracking-widest text-slate-400 uppercase block">Next Reminder</label>
                     {probForm.reminderInDays !== -1 && probForm.reminderInDays !== -2 && (
-                      <span className="text-[9px] font-mono text-sky-400 font-bold bg-sky-505/10 px-1.5 py-0.5 rounded border border-sky-500/20">
+                      <span className="text-[9px] font-mono text-sky-400 font-bold bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">
                         {formatDate(addDays(probForm.date || today(), probForm.reminderInDays))}
                       </span>
                     )}
@@ -210,7 +209,7 @@ export default function ProblemFormDialog({
                   <button
                     type="button"
                     onClick={() => setProbForm({ ...probForm, platforms: [...probForm.platforms, { platform: 'LeetCode', url: '' }] })}
-                    className="text-[10px] font-bold text-sky-400 bg-sky-505/10 px-2.5 py-1 rounded border border-sky-500/20 hover:bg-sky-505/20 transition-colors"
+                    className="text-[10px] font-bold text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded border border-sky-500/20 hover:bg-sky-500/20 transition-colors"
                   >
                     + Add Link
                   </button>
@@ -236,7 +235,7 @@ export default function ProblemFormDialog({
                         <div className="col-span-3 flex gap-2 items-center">
                           <input
                             placeholder="https://..."
-                            className="flex-1 bg-slate-950 border border-slate-800 p-2.5 rounded-lg text-slate-355 text-xs outline-none focus:border-sky-500 transition-colors font-mono h-[38px]"
+                            className="flex-1 bg-slate-950 border border-slate-800 p-2.5 rounded-lg text-slate-300 text-xs outline-none focus:border-sky-500 transition-colors font-mono h-[38px]"
                             value={platform.url}
                             onChange={(e) => {
                               const updatedPlatforms = [...probForm.platforms];

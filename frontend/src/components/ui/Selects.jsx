@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 export function CustomSelect({ value, onChange, options, placeholder, label }) {
@@ -73,7 +73,7 @@ export function CustomFilterSelect({ value, onChange, options, placeholder, labe
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between bg-slate-950 border border-slate-800 p-2.5 rounded-lg text-sm text-slate-355 focus:border-sky-500 transition-colors h-[38px]"
+        className="w-full flex items-center justify-between bg-slate-950 border border-slate-800 p-2.5 rounded-lg text-sm text-slate-300 focus:border-sky-500 transition-colors h-[38px]"
       >
         <span className="truncate">{selectedOpt ? selectedOpt.label : placeholder}</span>
         <ChevronDown size={14} className={`text-slate-500 transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -89,7 +89,7 @@ export function CustomFilterSelect({ value, onChange, options, placeholder, labe
                 setOpen(false);
               }}
               className={`w-full text-left px-3 py-2 text-xs font-semibold transition-colors hover:bg-slate-800/60 ${
-                option.value === value ? 'text-sky-400 bg-sky-500/5 font-bold' : 'text-slate-355'
+                option.value === value ? 'text-sky-400 bg-sky-500/5 font-bold' : 'text-slate-300'
               }`}
             >
               {option.label}
@@ -128,7 +128,7 @@ export function CustomHeaderSelect({ value, onChange, options, placeholder }) {
         <ChevronDown size={10} className={`text-slate-500 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <div className="absolute left-1/2 transform -translate-x-1/2 mt-1.5 w-32 bg-slate-955 border border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden py-1 max-h-48 overflow-y-auto custom-scrollbar">
+        <div className="absolute left-1/2 transform -translate-x-1/2 mt-1.5 w-32 bg-slate-950 border border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden py-1 max-h-48 overflow-y-auto custom-scrollbar">
           {options.map((option) => (
             <button
               key={option.value}
@@ -138,7 +138,7 @@ export function CustomHeaderSelect({ value, onChange, options, placeholder }) {
                 setOpen(false);
               }}
               className={`w-full text-left px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider transition-colors hover:bg-slate-800/60 ${
-                option.value === value ? 'text-sky-400 bg-sky-505/5 font-bold' : 'text-slate-400'
+                option.value === value ? 'text-sky-400 bg-sky-500/10 font-bold' : 'text-slate-400'
               }`}
             >
               {option.label}
@@ -187,7 +187,7 @@ export function CustomFormPlatformSelect({ value, onChange }) {
                 setOpen(false);
               }}
               className={`w-full text-left px-3 py-2 text-xs transition-colors hover:bg-slate-800/60 ${
-                option === value ? 'text-sky-400 bg-sky-505/5 font-bold' : 'text-slate-300'
+                option === value ? 'text-sky-400 bg-sky-500/10 font-bold' : 'text-slate-300'
               }`}
             >
               {option}

@@ -1,9 +1,9 @@
-import React from 'react';
 import { Recycle } from 'lucide-react';
 
-export default function RecycleTab({ active, children, trash, emptyTrash, restoreProblem, deletePermanent }) {
+export default function RecycleTab({ active, trash, emptyTrash, restoreProblem, deletePermanent }) {
   if (!active) return null;
-  if (children) return children;
+
+  const isTrashEmpty = !trash || trash.length === 0;
 
   return (
     <div className="animate-in fade-in space-y-6">
@@ -12,7 +12,17 @@ export default function RecycleTab({ active, children, trash, emptyTrash, restor
           <h2 className="text-lg font-bold text-rose-400">Recycle Bin</h2>
           <p className="text-sm text-rose-400/70 mt-1">Items remain here until permanently deleted.</p>
         </div>
-        <button onClick={emptyTrash} className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors shadow-[0_0_15px_rgba(244,63,94,0.3)]">Empty Bin</button>
+        <button
+          onClick={emptyTrash}
+          disabled={isTrashEmpty}
+          className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors shadow-[0_0_15px_rgba(244,63,94,0.3)] ${
+            isTrashEmpty
+              ? 'bg-slate-800 text-slate-500 cursor-not-allowed shadow-none'
+              : 'bg-rose-500 hover:bg-rose-600 text-white'
+          }`}
+        >
+          Empty Bin
+        </button>
       </div>
 
       <div className="space-y-3">

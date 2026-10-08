@@ -118,12 +118,12 @@ export default function ProblemDetailDialog({
                     setCodeCopied(true);
                     setTimeout(() => setCodeCopied(false), 2000);
                   }}
-                  className="text-[10px] font-bold text-sky-400 bg-sky-505/10 px-2 py-1 rounded border border-sky-500/20 hover:bg-sky-505/20 transition-all flex items-center gap-1"
+                  className="text-[10px] font-bold text-sky-400 bg-sky-500/10 px-2 py-1 rounded border border-sky-500/20 hover:bg-sky-500/20 transition-all flex items-center gap-1"
                 >
                   {codeCopied ? 'Copied!' : 'Copy Code'}
                 </button>
               </div>
-              <pre className="p-4 bg-slate-950/80 border border-slate-800 rounded-xl overflow-x-auto text-xs font-mono text-slate-355 max-h-72 custom-scrollbar leading-relaxed">
+              <pre className="p-4 bg-slate-950/80 border border-slate-800 rounded-xl overflow-x-auto text-xs font-mono text-slate-300 max-h-72 custom-scrollbar leading-relaxed">
                 <code>{detailModal.code}</code>
               </pre>
             </div>
@@ -142,7 +142,7 @@ export default function ProblemDetailDialog({
           </button>
           <button
             onClick={onClose}
-            className="bg-slate-800 text-slate-200 border border-slate-700 px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-slate-750 hover:text-white transition-colors"
+            className="bg-slate-800 text-slate-200 border border-slate-700 px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-slate-700 hover:text-white transition-colors"
           >
             Close
           </button>
