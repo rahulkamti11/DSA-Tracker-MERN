@@ -1,11 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 export default function Tooltip({ children, content }) {
   const [visible, setVisible] = useState(false);
+  const [coords, setCoords] = useState(null);
+  const triggerRef = useRef(null);
   const timerRef = useRef(null);
+
+  const updatePosition = () => {
+    if (!triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    
+    // Check if there is enough space above (need ~40px)
+    const showBelow = rect.top < 45;
+    
+    const top = showBelow ? rect.bottom + 6 : rect.top - 6;
+    const left = Math.max(20, Math.min(window.innerWidth - 20, rect.left + rect.width / 2));
+    
+    setCoords({
+      top,
+      left,
+      showBelow,
+    });
+  };
 
   const handleMouseEnter = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
+    updatePosition();
     setVisible(true);
     timerRef.current = setTimeout(() => {
       setVisible(false);
@@ -17,6 +38,12 @@ export default function Tooltip({ children, content }) {
     setVisible(false);
   };
 
+  useLayoutEffect(() => {
+    if (visible) {
+      updatePosition();
+    }
+  }, [visible]);
+
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -24,17 +51,31 @@ export default function Tooltip({ children, content }) {
   }, []);
 
   return (
-    <div
-      className="relative inline-block"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {children}
-      {visible && (
-        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2.5 py-1 bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-200 rounded-md shadow-xl whitespace-nowrap z-50 animate-in fade-in zoom-in-95 duration-150">
+    <>
+      <div
+        ref={triggerRef}
+        className="relative inline-flex"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {children}
+      </div>
+      {visible && content && coords && createPortal(
+        <div
+          style={{
+            position: 'fixed',
+            top: `${coords.top}px`,
+            left: `${coords.left}px`,
+            transform: coords.showBelow ? 'translateX(-50%)' : 'translate(-50%, -100%)',
+            pointerEvents: 'none',
+            zIndex: 99999,
+          }}
+          className="px-2.5 py-1 bg-slate-900 border border-slate-700/80 text-[10px] font-mono text-slate-200 rounded-md shadow-2xl whitespace-nowrap animate-in fade-in zoom-in-95 duration-100"
+        >
           {content}
-        </div>
+        </div>,
+        document.body
       )}
-    </div>
+    </>
   );
 }
