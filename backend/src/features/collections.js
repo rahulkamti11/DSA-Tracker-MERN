@@ -1,7 +1,7 @@
 import express from 'express';
 import Collection from '../models/Collection.js';
 import Problem from '../models/Problem.js';
-import auth from '../middleware/auth.js';
+import auth from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 

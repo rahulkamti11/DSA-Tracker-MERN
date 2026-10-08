@@ -1,6 +1,6 @@
 import express from 'express';
 import Problem from '../models/Problem.js';
-import auth from '../middleware/auth.js';
+import auth from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
@@ -27,7 +27,7 @@ router.get('/trash', auth, async (req, res) => {
 // Add a problem
 router.post('/', auth, async (req, res) => {
   try {
-    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep } = req.body;
+    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep, lastReviewed, code, language } = req.body;
     if (!name) {
       return res.status(400).json({ message: 'Problem name is required.' });
     }
@@ -46,7 +46,10 @@ router.post('/', auth, async (req, res) => {
       interval,
       nextRev,
       revCount,
-      noRep
+      noRep,
+      lastReviewed,
+      code,
+      language
     });
 
     const savedProblem = await newProblem.save();
@@ -59,7 +62,7 @@ router.post('/', auth, async (req, res) => {
 // Update a problem
 router.put('/:id', auth, async (req, res) => {
   try {
-    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep } = req.body;
+    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep, lastReviewed, code, language } = req.body;
     
     const problem = await Problem.findOne({ _id: req.params.id, userId: req.user.id });
     if (!problem) {
@@ -79,6 +82,9 @@ router.put('/:id', auth, async (req, res) => {
     if (nextRev !== undefined) problem.nextRev = nextRev;
     if (revCount !== undefined) problem.revCount = revCount;
     if (noRep !== undefined) problem.noRep = noRep;
+    if (lastReviewed !== undefined) problem.lastReviewed = lastReviewed;
+    if (code !== undefined) problem.code = code;
+    if (language !== undefined) problem.language = language;
 
     const updatedProblem = await problem.save();
     res.json(updatedProblem);

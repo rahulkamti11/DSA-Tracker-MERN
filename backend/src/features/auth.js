@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import Problem from '../models/Problem.js';
 import Collection from '../models/Collection.js';
-import auth from '../middleware/auth.js';
+import auth from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ const getSeedProblems = (userId) => [
   { userId, name: 'Two Sum', diff: 'Easy', status: 'Solved', tags: ['Array', 'Hash Table'], collId: 'blind75', starred: true, notes: '## Approach\nUse a hash map to store the difference between the target and the current element as you iterate.\n\n**Time:** O(n) | **Space:** O(n)', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/two-sum/'}], date: addDays(today(), -5), interval: 14, nextRev: addDays(today(), 9), revCount: 4 },
   { userId, name: 'LRU Cache', diff: 'Medium', status: 'Attempted', tags: ['Design', 'Linked List', 'Hash Table'], collId: '', starred: false, notes: '', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/lru-cache/'}, {platform: 'GFG', url: 'https://www.geeksforgeeks.org/problems/lru-cache/1'}], date: today(), interval: 1, nextRev: addDays(today(), 1), revCount: 0 },
   { userId, name: 'Valid Parentheses', diff: 'Easy', status: 'Solved', tags: ['String', 'Stack'], collId: 'blind75', starred: false, notes: '', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/valid-parentheses/'}], date: addDays(today(), -10), interval: 30, nextRev: addDays(today(), 20), revCount: 5 },
-  { userId, name: 'Median of Two Sorted Arrays', diff: 'Hard', status: 'Revisit', tags: ['Array', 'Binary Search'], collId: 'top150', starred: true, notes: '', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/median-of-two-sorted-arrays/'}], date: addDays(today(), -15), interval: 1, nextRev: today(), revCount: 1 },
+  { userId, name: 'Median of Two Sorted Arrays', diff: 'Hard', status: 'Attempted', tags: ['Array', 'Binary Search'], collId: 'top150', starred: true, notes: '', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/median-of-two-sorted-arrays/'}], date: addDays(today(), -15), interval: 1, nextRev: today(), revCount: 1 },
   { userId, name: 'Longest Palindromic Substring', diff: 'Medium', status: 'Solved', tags: ['String', 'Dynamic Programming'], collId: '', starred: false, notes: '', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/longest-palindromic-substring/'}], date: addDays(today(), -20), interval: 14, nextRev: addDays(today(), -1), revCount: 3 },
   { userId, name: 'Climbing Stairs', diff: 'Easy', status: 'Solved', tags: ['Math', 'Dynamic Programming'], collId: 'blind75', starred: false, notes: '', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/climbing-stairs/'}], date: addDays(today(), -4), interval: 7, nextRev: addDays(today(), 3), revCount: 1 },
   { userId, name: 'Search in Rotated Sorted Array', diff: 'Medium', status: 'Solved', tags: ['Array', 'Binary Search'], collId: 'blind75', starred: false, notes: '', platforms: [{platform: 'LeetCode', url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/'}], date: addDays(today(), -2), interval: 3, nextRev: addDays(today(), 1), revCount: 2 }

@@ -23,7 +23,7 @@ const problemSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Solved', 'Attempted', 'Revisit'],
+    enum: ['Solved', 'Attempted', 'Mastered'],
     default: 'Solved'
   },
   tags: [{
@@ -41,6 +41,14 @@ const problemSchema = new mongoose.Schema({
   notes: {
     type: String,
     default: ''
+  },
+  code: {
+    type: String,
+    default: ''
+  },
+  language: {
+    type: String,
+    default: 'cpp'
   },
   platforms: [platformSchema],
   date: {
@@ -62,6 +70,10 @@ const problemSchema = new mongoose.Schema({
   noRep: {
     type: Boolean,
     default: false
+  },
+  lastReviewed: {
+    type: String,
+    default: null
   },
   isDeleted: {
     type: Boolean,
