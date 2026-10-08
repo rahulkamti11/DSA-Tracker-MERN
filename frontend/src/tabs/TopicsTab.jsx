@@ -1,15 +1,21 @@
-export default function TopicsTab({ active, children, problems, selectedTopic, setSelectedTopic, formatDate, openAddModal }) {
+import { useMemo } from 'react';
+
+export default function TopicsTab({ active, problems, selectedTopic, setSelectedTopic, formatDate, openAddModal }) {
+  const sortedTopics = useMemo(() => {
+    const topicStats = {};
+    problems.forEach((problem) => {
+      if (Array.isArray(problem.tags)) {
+        problem.tags.forEach((tag) => {
+          if (!topicStats[tag]) topicStats[tag] = { total: 0, Easy: 0, Medium: 0, Hard: 0 };
+          topicStats[tag].total += 1;
+          topicStats[tag][problem.diff] = (topicStats[tag][problem.diff] || 0) + 1;
+        });
+      }
+    });
+    return Object.entries(topicStats).sort((a, b) => b[1].total - a[1].total);
+  }, [problems]);
+
   if (!active) return null;
-  if (children) return children;
-
-  const topicStats = {};
-  problems.forEach((problem) => problem.tags.forEach((tag) => {
-    if (!topicStats[tag]) topicStats[tag] = { total: 0, Easy: 0, Medium: 0, Hard: 0 };
-    topicStats[tag].total += 1;
-    topicStats[tag][problem.diff] = (topicStats[tag][problem.diff] || 0) + 1;
-  }));
-
-  const sortedTopics = Object.entries(topicStats).sort((a, b) => b[1].total - a[1].total);
 
   if (selectedTopic) {
     const list = problems.filter((problem) => problem.tags.includes(selectedTopic));

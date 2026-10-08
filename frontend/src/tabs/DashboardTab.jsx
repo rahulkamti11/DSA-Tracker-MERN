@@ -1,29 +1,38 @@
+import { useMemo } from 'react';
 import { Activity, Target, RotateCcw, ListTodo } from 'lucide-react';
 import Badge from '../components/ui/Badge.jsx';
 import { today, addDays, formatDate } from '../utils/date.js';
 
 export default function DashboardTab({
   active,
-  children,
   problems,
   activity,
   setView,
   setReviewTab,
 }) {
-  if (!active) return null;
-  if (children) return children;
-
   const todayStr = today();
-  const solved = problems.filter(p => p.status === 'Solved' || p.status === 'Mastered');
-  const srsProblems = problems.filter(p => p.status === 'Solved' || p.status === 'Attempted');
-  const due = srsProblems.filter(p => p.nextRev <= todayStr && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev));
-  const upcoming = srsProblems.filter(p => p.nextRev > todayStr && p.nextRev <= addDays(todayStr, 7) && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev));
-  const overDue = srsProblems.filter(p => p.nextRev < todayStr && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev));
-  const diffCounts = {
-    Easy: solved.filter(p => p.diff === 'Easy').length,
-    Medium: solved.filter(p => p.diff === 'Medium').length,
-    Hard: solved.filter(p => p.diff === 'Hard').length
-  };
+
+  const { solved, due, upcoming, overDue, diffCounts } = useMemo(() => {
+    const solvedList = problems.filter(p => p.status === 'Solved' || p.status === 'Mastered');
+    const srs = problems.filter(p => p.status === 'Solved' || p.status === 'Attempted');
+    const dueList = srs.filter(p => p.nextRev && p.nextRev <= todayStr && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev));
+    const upcomingList = srs.filter(p => p.nextRev && p.nextRev > todayStr && p.nextRev <= addDays(todayStr, 7) && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev));
+    const overDueList = srs.filter(p => p.nextRev && p.nextRev < todayStr && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev));
+    const counts = {
+      Easy: solvedList.filter(p => p.diff === 'Easy').length,
+      Medium: solvedList.filter(p => p.diff === 'Medium').length,
+      Hard: solvedList.filter(p => p.diff === 'Hard').length
+    };
+    return {
+      solved: solvedList,
+      due: dueList,
+      upcoming: upcomingList,
+      overDue: overDueList,
+      diffCounts: counts
+    };
+  }, [problems, todayStr]);
+
+  if (!active) return null;
 
 
   return (

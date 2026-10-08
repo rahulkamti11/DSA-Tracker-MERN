@@ -1,11 +1,9 @@
-import React from 'react';
 import { BookOpen } from 'lucide-react';
 import Badge from '../components/ui/Badge.jsx';
 import { parseMd } from '../utils/markdown.js';
 
-export default function NotesTab({ active, children, problems, setNoteModal }) {
+export default function NotesTab({ active, problems, setNoteModal }) {
   if (!active) return null;
-  if (children) return children;
 
   const notesProblems = problems.filter((problem) => problem.notes && problem.notes.trim() !== '');
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   LayoutDashboard,
   ListTodo,
@@ -71,7 +71,6 @@ export default function App() {
     problems,
     setProblems,
     collections,
-    setCollections,
     trash,
     activity,
     saveProblem,
@@ -124,41 +123,15 @@ export default function App() {
   });
   const [notesTab, setNotesTab] = useState('write');
   const [addFormTab, setAddFormTab] = useState('details');
-  const [settingsForm, setSettingsForm] = useState({
-    displayName: 'Guest User',
-    username: 'guest@dsatracker.com',
-    password: '',
-    theme: 'dark',
-    tooltipsEnabled: true,
-  });
 
-  // Reset view state when logging out / changing user
-  useEffect(() => {
+  // Reset view state when changing user
+  const [prevUser, setPrevUser] = useState(user?.username);
+  if (user?.username !== prevUser) {
+    setPrevUser(user?.username);
     setSelectedCollection(null);
     setSelectedTopic(null);
     setView('problems');
-  }, [user]);
-
-  // Sync settings form when user changes
-  useEffect(() => {
-    setSettingsForm({
-      displayName: user && user.name ? user.name : 'Guest User',
-      username: user && user.username ? user.username : 'guest@dsatracker.com',
-      password: '',
-      theme: 'dark',
-      tooltipsEnabled: true,
-    });
-  }, [user]);
-
-  // Sync selectedInterval when next review modal opens
-  useEffect(() => {
-    if (remModal.id) {
-      const p = problems.find(x => x.id === remModal.id);
-      if (p) {
-        setSelectedInterval(p.noRep ? -1 : p.interval || 3);
-      }
-    }
-  }, [remModal.id, problems]);
+  }
 
   // Keyboard Shortcuts Hook
   useKeyboardShortcuts({
@@ -260,6 +233,10 @@ export default function App() {
   const handleMarkReviewed = (id) => {
     markReviewed(id)
       .then(() => {
+        const p = problems.find(x => x.id === id);
+        if (p) {
+          setSelectedInterval(p.noRep ? -1 : p.interval || 3);
+        }
         setRemModal({ open: true, id });
       })
       .catch(err => console.error(err));
@@ -462,7 +439,6 @@ export default function App() {
           openAddModal={openAddModal}
           user={user}
           setProblems={setProblems}
-          setCollections={setCollections}
           setConfirmModal={setConfirmModal}
           deleteCollection={deleteCollection}
           setNewCollColor={setNewCollColor}
@@ -476,7 +452,7 @@ export default function App() {
         <RecycleTab active={view === 'trash'} trash={trash} emptyTrash={handleEmptyTrash} restoreProblem={restoreProblem} deletePermanent={handleDeletePermanent} />
 
         {/* VIEW: SETTINGS */}
-        <SettingsTab active={view === 'settings'} settingsForm={settingsForm} setSettingsForm={setSettingsForm} />
+        <SettingsTab key={user?.username || 'guest'} active={view === 'settings'} user={user} />
       </Shell>
 
       <ProblemFormDialog

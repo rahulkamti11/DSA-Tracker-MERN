@@ -85,5 +85,9 @@ const problemSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+// Compound indexes for user queries and review queue sorting
+problemSchema.index({ userId: 1, isDeleted: 1, createdAt: -1 });
+problemSchema.index({ userId: 1, nextRev: 1 });
+
 const Problem = mongoose.model('Problem', problemSchema);
 export default Problem;

@@ -1,6 +1,15 @@
-export default function SettingsTab({ active, children, settingsForm, setSettingsForm }) {
+import { useState } from 'react';
+
+export default function SettingsTab({ active, user }) {
+  const [settingsForm, setSettingsForm] = useState(() => ({
+    displayName: user && user.name ? user.name : 'Guest User',
+    username: user && user.username ? user.username : 'guest@dsatracker.com',
+    password: '',
+    theme: 'dark',
+    tooltipsEnabled: true,
+  }));
+
   if (!active) return null;
-  if (children) return children;
 
   return (
     <div className="animate-in fade-in space-y-6">
@@ -13,7 +22,7 @@ export default function SettingsTab({ active, children, settingsForm, setSetting
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-4 animate-in slide-in-from-bottom-3 duration-300">
-          <h3 className="text-md font-bold text-slate-200 border-b border-slate-850 pb-2">Profile Details</h3>
+          <h3 className="text-md font-bold text-slate-200 border-b border-slate-800 pb-2">Profile Details</h3>
           <div className="space-y-3">
             <div>
               <label className="text-[10px] font-mono tracking-widest text-slate-400 uppercase mb-1.5 block">Display Name</label>
@@ -31,7 +40,7 @@ export default function SettingsTab({ active, children, settingsForm, setSetting
         </div>
 
         <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-5 animate-in slide-in-from-bottom-3 duration-300 delay-100">
-          <h3 className="text-md font-bold text-slate-200 border-b border-slate-850 pb-2">Preferences</h3>
+          <h3 className="text-md font-bold text-slate-200 border-b border-slate-800 pb-2">Preferences</h3>
           <div>
             <label className="text-[10px] font-mono tracking-widest text-slate-400 uppercase mb-2 block">Theme Mode</label>
             <div className="flex bg-slate-950 border border-slate-800 rounded-full p-1 gap-1 max-w-[280px]">

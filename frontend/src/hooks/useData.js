@@ -47,10 +47,12 @@ export default function useData(user) {
         })
         .catch(err => console.error('Error fetching profile:', err));
     } else {
-      setProblems([]);
-      setTrash([]);
-      setCollections([]);
-      setActivity({});
+      queueMicrotask(() => {
+        setProblems([]);
+        setTrash([]);
+        setCollections([]);
+        setActivity({});
+      });
     }
   }, [user]);
 

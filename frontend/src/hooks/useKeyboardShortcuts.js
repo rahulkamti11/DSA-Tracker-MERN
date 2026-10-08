@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function useKeyboardShortcuts({
-  onEscape,
-  onN,
-  onD,
-  onP,
-  onQuestion,
-}) {
+export default function useKeyboardShortcuts(callbacks) {
+  const callbacksRef = useRef(callbacks);
+
+  useEffect(() => {
+    callbacksRef.current = callbacks;
+  }, [callbacks]);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (
@@ -19,22 +19,23 @@ export default function useKeyboardShortcuts({
       }
 
       if (e.key === 'Escape') {
-        if (onEscape) onEscape();
+        callbacksRef.current.onEscape?.();
+        return;
       }
 
       const key = e.key.toLowerCase();
       if (key === 'n') {
-        if (onN) onN();
+        callbacksRef.current.onN?.();
       } else if (key === 'd') {
-        if (onD) onD();
+        callbacksRef.current.onD?.();
       } else if (key === 'p') {
-        if (onP) onP();
+        callbacksRef.current.onP?.();
       } else if (key === '?') {
-        if (onQuestion) onQuestion();
+        callbacksRef.current.onQuestion?.();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onEscape, onN, onD, onP, onQuestion]);
+  }, []);
 }
