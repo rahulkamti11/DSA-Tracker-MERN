@@ -11,7 +11,7 @@ import {
   Menu,
   X,
   Plus,
-  Download,
+  Upload,
   ChevronDown,
   LogIn,
   LogOut,
@@ -349,7 +349,7 @@ export default function App() {
 
             {/* Guest Mode UI at bottom of sidebar */}
             {(!user || user.isGuest) && (
-              <div className="p-4 border-t border-slate-800 shrink-0 bg-slate-900/60">
+              <div className="p-4 border-t border-slate-200 dark:border-slate-800 shrink-0 bg-slate-100/60 dark:bg-slate-900/60">
                 {sidebarCollapsed ? (
                   <Tooltip content="Guest Mode (Login to save progress)">
                     <div className="w-10 h-10 mx-auto rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-500 font-black text-sm shadow-[0_0_10px_rgba(244,63,94,0.2)] animate-pulse">
@@ -357,13 +357,13 @@ export default function App() {
                     </div>
                   </Tooltip>
                 ) : (
-                  <div className="bg-rose-500/5 border border-rose-500/20 p-3 rounded-xl flex flex-col items-center gap-1 shadow-inner animate-in fade-in duration-200">
+                  <div className="bg-rose-500/10 border border-rose-500/25 p-3 rounded-xl flex flex-col items-center gap-1.5 shadow-sm animate-in fade-in duration-200">
                     <div className="flex items-center gap-2 relative">
                       <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping absolute -left-3.5"></span>
                       <span className="w-1.5 h-1.5 rounded-full bg-rose-500 absolute -left-[11px]"></span>
-                      <span className="text-[10px] font-black text-rose-500 uppercase tracking-widest">Guest Mode</span>
+                      <span className="text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest">Guest Mode</span>
                     </div>
-                    <span className="text-[9px] font-bold text-slate-500 text-center leading-normal">Login to save progress</span>
+                    <span className="text-[9px] font-semibold text-slate-600 dark:text-slate-400 text-center leading-normal">Login to save progress</span>
                   </div>
                 )}
               </div>
@@ -382,7 +382,7 @@ export default function App() {
               </Tooltip>
               
               <div className="relative">
-                <button onClick={() => setExportOpen(!exportOpen)} className="flex items-center gap-2 text-sm text-slate-300 bg-slate-800/50 hover:bg-slate-800 px-3 py-2 rounded-lg transition-colors border border-slate-700/50"><Download size={16}/><span className="hidden sm:inline">Export</span><ChevronDown size={14} className={exportOpen ? 'rotate-180 transition-transform' : 'transition-transform'}/></button>
+                <button onClick={() => setExportOpen(!exportOpen)} className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/50 dark:hover:bg-slate-800 px-3 py-2 rounded-lg transition-colors border border-slate-300 dark:border-slate-700/50"><Upload size={16}/><span className="hidden sm:inline">Export</span><ChevronDown size={14} className={exportOpen ? 'rotate-180 transition-transform' : 'transition-transform'}/></button>
                 {exportOpen && (
                   <div className="absolute right-0 mt-2 w-32 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-50">
                     <button onClick={() => { exportJSON(); setExportOpen(false); }} className="w-full text-left px-4 py-2.5 text-sm text-slate-200 hover:bg-slate-700 transition-colors">Export JSON</button>

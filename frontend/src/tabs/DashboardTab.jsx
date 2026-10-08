@@ -131,8 +131,8 @@ export default function DashboardTab({
               <p className="text-slate-500 text-sm font-mono border border-dashed border-slate-700/50 p-4 rounded-lg text-center">No reviews due. All caught up! 🎉</p>
             ) : (
               due.map((problem) => (
-                <div key={problem.id} onClick={() => { setView('review'); setReviewTab(problem.nextRev < today() ? 'overDue' : 'dueToday'); }} className="flex items-center justify-between p-3.5 bg-slate-950/50 rounded-lg border border-slate-800 cursor-pointer hover:border-rose-500/50 transition-colors">
-                  <span className="font-medium text-sm truncate text-slate-300">{problem.name}</span>
+                <div key={problem.id} onClick={() => { setView('review'); setReviewTab(problem.nextRev < today() ? 'overDue' : 'dueToday'); }} className="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-950/50 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-rose-500/50 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
+                  <span className="font-medium text-sm truncate text-slate-800 dark:text-slate-300">{problem.name}</span>
                   <Badge color="red">Due</Badge>
                 </div>
               ))
@@ -153,9 +153,9 @@ export default function DashboardTab({
               <p className="text-slate-500 text-sm font-mono border border-dashed border-slate-700/50 p-4 rounded-lg text-center">No reviews in the next 7 days.</p>
             ) : (
               upcoming.map((problem) => (
-                <div key={problem.id} onClick={() => { setView('review'); setReviewTab('upcoming'); }} className="flex items-center justify-between p-3.5 bg-slate-950/50 rounded-lg border border-slate-800 cursor-pointer hover:border-sky-500/50 transition-colors">
-                  <span className="font-medium text-sm truncate text-slate-300">{problem.name}</span>
-                  <span className="text-[10px] font-mono text-amber-400">{formatDate(problem.nextRev)}</span>
+                <div key={problem.id} onClick={() => { setView('review'); setReviewTab('upcoming'); }} className="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-950/50 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-sky-500/50 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
+                  <span className="font-medium text-sm truncate text-slate-800 dark:text-slate-300">{problem.name}</span>
+                  <span className="text-[10px] font-mono text-amber-500 dark:text-amber-400">{formatDate(problem.nextRev)}</span>
                 </div>
               ))
             )}
