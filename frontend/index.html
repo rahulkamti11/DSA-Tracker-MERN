@@ -5,8 +5,23 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>dsa-tracker</title>
+    <script>
+      (function() {
+        const theme = localStorage.getItem('dsa_theme') || 'dark';
+        let isDark = true;
+        if (theme === 'light') isDark = false;
+        else if (theme === 'system') isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.style.backgroundColor = '#020617';
+        } else {
+          document.documentElement.classList.add('light');
+          document.documentElement.style.backgroundColor = '#f8fafc';
+        }
+      })();
+    </script>
   </head>
-  <body>
+  <body style="background-color: #020617; overscroll-behavior: none;">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

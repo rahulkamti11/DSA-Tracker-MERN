@@ -46,12 +46,14 @@ import Tooltip from './components/ui/Tooltip.jsx';
 import useAuth from './hooks/useAuth.js';
 import useData from './hooks/useData.js';
 import useKeyboardShortcuts from './hooks/useKeyboardShortcuts.js';
+import useTheme from './hooks/useTheme.js';
 
 import { today, addDays, formatDate } from './utils/date.js';
 import { getPlatformInfo, getRealUrl } from './utils/platform.js';
 import { parseMd } from './utils/markdown.js';
 
 export default function App() {
+  useTheme();
   // Custom Hooks for Auth and Data Services
   const {
     user,

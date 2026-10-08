@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import useTheme from '../hooks/useTheme.js';
 
 export default function SettingsTab({ active, user }) {
+  const { themeMode, setTheme } = useTheme();
   const [settingsForm, setSettingsForm] = useState(() => ({
     displayName: user && user.name ? user.name : 'Guest User',
     username: user && user.username ? user.username : 'guest@dsatracker.com',
     password: '',
-    theme: 'dark',
     tooltipsEnabled: true,
   }));
 
@@ -48,9 +49,9 @@ export default function SettingsTab({ active, user }) {
                 <button
                   key={theme.id}
                   type="button"
-                  onClick={() => setSettingsForm({ ...settingsForm, theme: theme.id })}
+                  onClick={() => setTheme(theme.id)}
                   className={`flex-1 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
-                    settingsForm.theme === theme.id ? 'bg-sky-500 text-slate-950 shadow-[0_0_10px_rgba(56,189,248,0.4)]' : 'text-slate-400 hover:text-slate-200'
+                    themeMode === theme.id ? 'bg-sky-500 text-slate-950 shadow-[0_0_10px_rgba(56,189,248,0.4)]' : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
                   {theme.label}
