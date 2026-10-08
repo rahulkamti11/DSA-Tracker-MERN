@@ -82,15 +82,24 @@ export default function useData(user) {
     }
     const finalTags = uniqueTags.slice(0, 5);
     const isMastered = reminderInDays === -2 || probForm.status === 'Mastered';
+    const computedStatus = isMastered ? 'Mastered' : probForm.status;
+    const computedSolvedDate = (computedStatus === 'Solved' || computedStatus === 'Mastered')
+      ? (probForm.solvedDate || probForm.date || today())
+      : null;
+    const computedMasteredDate = computedStatus === 'Mastered'
+      ? (probForm.masteredDate || today())
+      : null;
 
     const data = {
       ...probForm,
-      status: isMastered ? 'Mastered' : probForm.status,
+      status: computedStatus,
       tags: finalTags,
       platforms: probForm.platforms.filter(pl => pl.platform && pl.url.trim() !== ''),
       noRep: reminderInDays === -1 || isMastered,
       interval: (reminderInDays !== -1 && reminderInDays !== -2) ? reminderInDays : 3,
       date: probForm.date || today(),
+      solvedDate: computedSolvedDate,
+      masteredDate: computedMasteredDate,
     };
     delete data.reminderInDays;
 
@@ -215,6 +224,8 @@ export default function useData(user) {
     const payload = days === -2 ? {
       noRep: true,
       status: 'Mastered',
+      masteredDate: p.masteredDate || today(),
+      solvedDate: p.solvedDate || p.date || today(),
       nextRev: null,
     } : {
       noRep: days === -1,

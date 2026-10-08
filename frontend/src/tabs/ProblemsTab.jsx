@@ -214,11 +214,17 @@ export default function ProblemsTab({
               </th>
               <th className="py-3 px-2 w-40 max-w-[180px]">Tags</th>
               <th className="py-3 px-2 w-24">Platforms</th>
-              <th className="py-3 px-2 w-32 whitespace-nowrap text-center">
+              <th className="py-3 px-2 w-36 whitespace-nowrap text-center">
                 <CustomHeaderSelect
                   value={dateDisplayType}
                   onChange={(val) => setDateDisplayType(val)}
-                  options={[{ value: 'added', label: 'Date Added' }, { value: 'last', label: 'Last Reviewed' }, { value: 'next', label: 'Next Review' }]}
+                  options={[
+                    { value: 'added', label: 'Date Added' },
+                    { value: 'solved', label: 'Date Solved' },
+                    { value: 'mastered', label: 'Date Mastered' },
+                    { value: 'last', label: 'Date Last Solved' },
+                    { value: 'next', label: 'Next Review' },
+                  ]}
                   placeholder="Date display"
                 />
               </th>
@@ -280,10 +286,26 @@ export default function ProblemsTab({
                       })}
                     </div>
                   </td>
-                  <td className="py-3 px-2 font-mono text-xs text-slate-400 whitespace-nowrap">
-                    {dateDisplayType === 'added' && formatDate(problem.date)}
-                    {dateDisplayType === 'last' && (formatDate(problem.lastReviewed) || 'Never')}
-                    {dateDisplayType === 'next' && (formatDate(problem.nextRev) || 'None')}
+                  <td className="py-3 px-2 font-mono text-xs text-slate-400 whitespace-nowrap text-center">
+                    {dateDisplayType === 'added' && (formatDate(problem.date) || '—')}
+                    {dateDisplayType === 'solved' && (
+                      problem.status === 'Attempted'
+                        ? <span className="text-slate-500 italic text-[11px]">Unsolved</span>
+                        : (formatDate(problem.solvedDate || problem.date) || '—')
+                    )}
+                    {dateDisplayType === 'mastered' && (
+                      problem.status === 'Mastered'
+                        ? (formatDate(problem.masteredDate || problem.date) || '—')
+                        : <span className="text-slate-500 italic text-[11px]">Not Mastered</span>
+                    )}
+                    {dateDisplayType === 'last' && (
+                      formatDate(problem.lastReviewed || problem.solvedDate || (problem.status !== 'Attempted' ? problem.date : null)) || <span className="text-slate-500 italic text-[11px]">Never</span>
+                    )}
+                    {dateDisplayType === 'next' && (
+                      (problem.status === 'Mastered' || problem.noRep)
+                        ? <span className="text-sky-400 text-[11px] font-semibold">Mastered</span>
+                        : (formatDate(problem.nextRev) || <span className="text-slate-500 italic text-[11px]">None</span>)
+                    )}
                   </td>
                   <td className="py-3 px-2 text-right">
                     <div className="grid grid-cols-2 gap-1.5 w-max ml-auto">

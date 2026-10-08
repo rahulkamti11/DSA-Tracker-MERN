@@ -128,7 +128,7 @@ export function CustomHeaderSelect({ value, onChange, options, placeholder }) {
         <ChevronDown size={10} className={`text-slate-500 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <div className="absolute left-1/2 transform -translate-x-1/2 mt-1.5 w-32 bg-slate-950 border border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden py-1 max-h-48 overflow-y-auto custom-scrollbar">
+        <div className="absolute left-1/2 transform -translate-x-1/2 mt-1.5 w-44 min-w-max bg-slate-950 border border-slate-800 rounded-lg shadow-xl z-50 overflow-hidden py-1 max-h-48 overflow-y-auto custom-scrollbar">
           {options.map((option) => (
             <button
               key={option.value}

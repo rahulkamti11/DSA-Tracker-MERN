@@ -75,6 +75,14 @@ const problemSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  solvedDate: {
+    type: String,
+    default: null
+  },
+  masteredDate: {
+    type: String,
+    default: null
+  },
   isDeleted: {
     type: Boolean,
     default: false

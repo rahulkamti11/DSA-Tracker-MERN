@@ -27,7 +27,7 @@ router.get('/trash', auth, async (req, res) => {
 // Add a problem
 router.post('/', auth, async (req, res) => {
   try {
-    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep, lastReviewed, code, language } = req.body;
+    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep, lastReviewed, solvedDate, masteredDate, code, language } = req.body;
     if (!name) {
       return res.status(400).json({ message: 'Problem name is required.' });
     }
@@ -48,6 +48,8 @@ router.post('/', auth, async (req, res) => {
       revCount,
       noRep,
       lastReviewed,
+      solvedDate,
+      masteredDate,
       code,
       language
     });
@@ -62,7 +64,7 @@ router.post('/', auth, async (req, res) => {
 // Update a problem
 router.put('/:id', auth, async (req, res) => {
   try {
-    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep, lastReviewed, code, language } = req.body;
+    const { name, diff, status, tags, collId, starred, notes, platforms, date, interval, nextRev, revCount, noRep, lastReviewed, solvedDate, masteredDate, code, language } = req.body;
     
     const problem = await Problem.findOne({ _id: req.params.id, userId: req.user.id });
     if (!problem) {
@@ -83,6 +85,8 @@ router.put('/:id', auth, async (req, res) => {
     if (revCount !== undefined) problem.revCount = revCount;
     if (noRep !== undefined) problem.noRep = noRep;
     if (lastReviewed !== undefined) problem.lastReviewed = lastReviewed;
+    if (solvedDate !== undefined) problem.solvedDate = solvedDate;
+    if (masteredDate !== undefined) problem.masteredDate = masteredDate;
     if (code !== undefined) problem.code = code;
     if (language !== undefined) problem.language = language;
 
