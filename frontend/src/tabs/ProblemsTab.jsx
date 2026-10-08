@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { ChevronDown, X, Search, Star, StarOff, FolderHeart, BookOpen, Eye, Pencil, Trash } from 'lucide-react';
 import Tooltip from '../components/ui/Tooltip.jsx';
 import Badge from '../components/ui/Badge.jsx';
@@ -16,8 +16,6 @@ export default function ProblemsTab({
   setNoteModal,
   setDetailModal,
 }) {
-  if (!active) return null;
-
   // Encapsulated states
   const [filters, setFilters] = useState({ search: '', diff: '', status: '', tags: [], platforms: [], collId: '' });
   const [starFilter, setStarFilter] = useState('all'); // 'all' | 'starred' | 'unstarred'
@@ -45,6 +43,7 @@ export default function ProblemsTab({
     });
   }, [problems, filters, starFilter]);
 
+  if (!active) return null;
 
   return (
     <div className="space-y-4 animate-in fade-in">

@@ -1,16 +1,15 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import Badge from '../components/ui/Badge.jsx';
 import { today } from '../utils/date.js';
 
-export default function ReviewTab({ active, children, reviewTab, setReviewTab, problems, markReviewed, setRemModal }) {
-  if (!active) return null;
-  if (children) return children;
-
+export default function ReviewTab({ active, reviewTab, setReviewTab, problems, markReviewed, setRemModal }) {
   const srsProblems = useMemo(() => problems.filter(p => p.status === 'Solved' || p.status === 'Attempted'), [problems]);
   const todayStr = today();
   const dueToday = useMemo(() => srsProblems.filter(p => p.nextRev === todayStr && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev)), [srsProblems, todayStr]);
   const overDue = useMemo(() => srsProblems.filter(p => p.nextRev < todayStr && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev)), [srsProblems, todayStr]);
   const allUpcoming = useMemo(() => srsProblems.filter(p => p.nextRev > todayStr && !p.noRep).sort((a, b) => new Date(a.nextRev) - new Date(b.nextRev)), [srsProblems, todayStr]);
+
+  if (!active) return null;
 
 
   const currentList = reviewTab === 'dueToday' ? dueToday : reviewTab === 'overDue' ? overDue : allUpcoming;

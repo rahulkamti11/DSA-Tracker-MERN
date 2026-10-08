@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { env } from '../config/env.js';
 
 const auth = (req, res, next) => {
   try {
@@ -7,7 +8,7 @@ const auth = (req, res, next) => {
       return res.status(401).json({ message: 'No authentication token, access denied' });
     }
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_dsa_tracker_key');
+    const verified = jwt.verify(token, env.jwtSecret);
     if (!verified) {
       return res.status(401).json({ message: 'Token verification failed, authorization denied' });
     }

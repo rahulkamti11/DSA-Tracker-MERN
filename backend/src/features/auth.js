@@ -5,6 +5,7 @@ import User from '../models/User.js';
 import Problem from '../models/Problem.js';
 import Collection from '../models/Collection.js';
 import auth from '../middleware/auth.middleware.js';
+import { env } from '../config/env.js';
 
 const router = express.Router();
 
@@ -60,7 +61,7 @@ router.post('/register', async (req, res) => {
     await Collection.insertMany(defaultColls);
 
     // Generate token
-    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET || 'super_secret_dsa_tracker_key');
+    const token = jwt.sign({ id: savedUser._id }, env.jwtSecret);
     res.json({
       token,
       user: {
@@ -106,21 +107,9 @@ router.post('/login', async (req, res) => {
           { userId: user._id, id: 'top150', name: 'Top Interview 150' }
         ]);
       }
-
-      const goalCount = await Goal.countDocuments({ userId: user._id });
-      if (goalCount === 0) {
-        const defaultGoal = new Goal({
-          userId: user._id,
-          total: 300,
-          easy: 100,
-          medium: 150,
-          hard: 50
-        });
-        await defaultGoal.save();
-      }
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'super_secret_dsa_tracker_key');
+    const token = jwt.sign({ id: user._id }, env.jwtSecret);
     res.json({
       token,
       user: {
@@ -170,7 +159,7 @@ router.post('/guest-login', async (req, res) => {
       return res.status(404).json({ message: 'Guest profile not seeded.' });
     }
 
-    const token = jwt.sign({ id: guestUser._id }, process.env.JWT_SECRET || 'super_secret_dsa_tracker_key');
+    const token = jwt.sign({ id: guestUser._id }, env.jwtSecret);
     res.json({
       token,
       user: {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Star, Pencil, Trash } from 'lucide-react';
 import Tooltip from '../components/ui/Tooltip.jsx';
 import Badge from '../components/ui/Badge.jsx';
@@ -15,7 +14,6 @@ export default function CollectionsTab({
   openAddModal,
   user,
   setProblems,
-  setCollections,
   setConfirmModal,
   deleteCollection,
   setNewCollColor,
@@ -170,17 +168,7 @@ export default function CollectionsTab({
                         title: 'Delete Collection?',
                         message: `Are you sure you want to delete the "${collection.name}" collection? This will not delete the problems inside it.`,
                         onConfirm: () => {
-                          if (user && user.token) {
-                            deleteCollection(user.token, collection.id)
-                              .then(() => {
-                                setCollections((items) => items.filter((item) => item.id !== collection.id));
-                                setProblems((items) => items.map((item) => item.collId === collection.id ? { ...item, collId: '' } : item));
-                              })
-                              .catch(err => console.error(err));
-                          } else {
-                            setCollections((items) => items.filter((item) => item.id !== collection.id));
-                            setProblems((items) => items.map((item) => item.collId === collection.id ? { ...item, collId: '' } : item));
-                          }
+                          deleteCollection(collection.id).catch((err) => console.error(err));
                         },
                       });
                     }}
