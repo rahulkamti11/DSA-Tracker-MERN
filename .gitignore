@@ -42,3 +42,9 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Documents & Presentations
+*.ppt
+*.pptx
+*.doc
+*.docx
