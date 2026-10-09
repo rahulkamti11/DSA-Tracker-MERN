@@ -1,137 +1,327 @@
-# 📊 DSA Tracker
+<div align="center">
 
-A premium MERN-stack spaced repetition (SRS) dashboard built to plan, log, review, and master data structures and algorithms (DSA) problems. Organize curated lists, write markdown study notes, and track your daily consistency with an integrated contribution heatmap.
+# ⚡ DSA Tracker
 
----
+### Master Data Structures & Algorithms with Spaced Repetition
 
-## ✨ Features
+A modern, production-grade MERN-stack dashboard designed to beat the forgetting curve. Track, review, organize, and retain your coding interview preparation with scientifically proven Spaced Repetition (SRS), 90-day consistency heatmaps, markdown notes, and curated collection lists.
 
-### 📅 Spaced Repetition Engine
-* **Next Review Calculations**: Configurable review intervals (1, 2, 3, 7, 14, 30, 60 days) to optimize long-term memory retention.
-* **Triage Sections**: Review queue divided into **Due Today**, **Over Due**, and **Upcoming** categories.
-* **Marked Done Actions**: Effortlessly update review schedules and increment solve counts in a single click.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.x-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
 
-### 📊 Interactive Analytics Dashboard
-* **Consistency Heatmap**: A GitHub-style 90-day activity calendar displaying your daily submission counts and consistency.
-* **Quick Stats**: Real-time trackers for Total Solved, Solved Today, Due Reviews, and Total Logged.
-* **Visual Guides**: Difficulty distribution indicators (Easy, Medium, Hard).
-
-### 📁 Curated Collections & Topics
-* **Custom Lists**: Group problems into custom lists (e.g. Blind 75, Top Interview 150) styled with custom description headers and color gradients.
-* **Topic Categorization**: Filter and sort problems dynamically by specific data structures or algorithmic patterns.
-
-### 📝 Notes & Editor
-* **Markdown Support**: Take extensive notes, copy code snippets, and review syntax inside a clean markdown parser.
-* **Quick View**: Preview notes directly from the logs using an interactive overlay dialog without leaving the table.
-
-### ⚙️ Premium UX & UI
-* **Collapsible Sidebar**: Slide the sidebar open or collapse it into a narrow icon-only desktop navigation panel.
-* **Recycle Bin**: Recover accidentally deleted problems or empty the trash permanently.
-* **Data Portability**: Export your collection and logs anytime in JSON or CSV format.
-* **Keyboard Shortcuts**: Open the helper modal using the `?` key for fast navigation.
-* **Dual Modes**: Learn locally in **Guest Mode** (client-side state) or sync across devices by creating an account.
+[Live Demo](#-getting-started) • [Key Features](#-core-features) • [Screenshots](#-visual-tour) • [Quickstart](#-getting-started) • [API Reference](#-api-reference)
 
 ---
 
-## 🛠️ Tech Stack
+</div>
 
-* **Frontend**: React (Vite), TailwindCSS, Lucide React (Icons)
-* **Backend**: Node.js, Express.js
-* **Database**: MongoDB (Mongoose ODM)
-* **Authentication**: JSON Web Tokens (JWT)
+## 📌 Why DSA Tracker?
+
+Solving 500+ LeetCode problems means nothing if you forget the key pattern during an interview 3 months later. 
+
+**DSA Tracker** transforms spontaneous coding practice into a structured, retention-first learning system. Powered by an automated **Spaced Repetition System (SRS)**, it schedules recurring review intervals (1, 3, 7, 14, 30, and 60 days) to lock algorithms permanently into your long-term memory.
+
+---
+
+## 📸 Visual Tour
+
+### 🌓 Premium Theme Engine (Dark vs. Light Mode)
+
+DSA Tracker features an accessible, high-contrast visual design with custom color schemes for both dark and light modes.
+
+| Dark Theme | Light Theme |
+| :---: | :---: |
+| ![Dashboard Dark](docs/screenshots/dashboard-dark.png) | ![Dashboard Light](docs/screenshots/dashboard-light.png) |
+| *Deep slate background with emerald accents & glow* | *Clean alabaster white with high-contrast slate typography* |
+
+---
+
+### 📋 Problem Log & Smart Filtering
+
+Log questions with difficulty ratings, status tracking, collection tags, patterns, and dynamic multi-criteria date sorting.
+
+| Problem Log (Dark) | Problem Log (Light) |
+| :---: | :---: |
+| ![Problem Log Dark](docs/screenshots/problem-log-dark.png) | ![Problem Log Light](docs/screenshots/problem-log-light.png) |
+
+---
+
+### 🔄 Spaced Repetition (SRS) Review Queue
+
+Never miss a review. Problems automatically filter into **Overdue**, **Due Today**, and **Upcoming** buckets based on your retention interval.
+
+<div align="center">
+  <img src="docs/screenshots/review-queue.png" alt="Review Queue" width="950" />
+</div>
+
+---
+
+### 📚 Knowledge Base, Collections & Topics
+
+Organize by curated roadmaps (Blind 75, NeetCode 150) and retain algorithmic insights with inline Markdown notes.
+
+| Curated Collections | Topic Breakdown |
+| :---: | :---: |
+| ![Collections](docs/screenshots/collections.png) | ![Topics](docs/screenshots/topics.png) |
+
+| Markdown Knowledge Base | Quick Add Modal |
+| :---: | :---: |
+| ![Notes Knowledge Base](docs/screenshots/notes-knowledge-base.png) | ![Add Problem Modal](docs/screenshots/add-problem-modal.png) |
+
+---
+
+## ✨ Core Features
+
+### 🧠 Scientific Spaced Repetition (SRS)
+* **Smart Intervals**: Progresses through retention stages (1 → 3 → 7 → 14 → 30 → 60 days) with each successful review.
+* **Triage Buckets**: Instant categorization into **Overdue**, **Due Today**, and **Upcoming** so you know exactly what to solve first.
+* **One-Click Review**: Mark reviews complete right from the queue; the system automatically pushes the next review date forward.
+
+### 📊 Real-Time Analytics & Heatmap
+* **90-Day Contribution Heatmap**: Visual GitHub-style daily practice grid tracking submission volume and unbroken consistency.
+* **KPI Metrics**: Real-time counters for Total Solved, Solved Today, Due Reviews, and Problems Logged.
+* **Difficulty Distribution**: Dynamic visual progress bars for Easy, Medium, and Hard problem splits.
+
+### ⚡ Problem Management & Smart Sorting
+* **Multi-Criteria Date Sorting**: Sort and view your problem list dynamically by:
+  - `Date Added`
+  - `Date Solved`
+  - `Date Mastered`
+  - `Date Last Solved`
+* **Uniform & Compact Controls**: Streamlined difficulty, status, and date filters with pixel-perfect alignment.
+* **Full-Text Instant Search**: Instant client-side search across titles, patterns, collections, and tags.
+
+### 📝 Markdown Study Notes
+* Write full markdown solutions, time/space complexity analysis ($O(N)$, $O(\log N)$), and trade-offs.
+* Quick-view and edit notes directly from the problem table without page reloads.
+
+### 🗂️ Curated Collections & Categorization
+* Bundle problems into custom collections (e.g. *Striver's SDE Sheet*, *Blind 75*, *Dynamic Programming Masterlist*).
+* Color-coded tags and custom descriptions for every collection.
+
+### 🛡️ Dual Guest & Cloud Modes
+* **Guest Mode**: Start tracking immediately out-of-the-box with instant client-side state — zero login required.
+* **Cloud Sync**: Create a secure account (JWT + bcrypt) to persist and sync your preparation across all devices.
+
+### 💾 Data Portability & Safety
+* **Import / Export**: Backup or migrate your entire problem library anytime with one-click **JSON** or **CSV** export.
+* **Recycle Bin (Trash)**: Soft-delete protection allows recovering accidentally removed problems or permanently purging them.
+
+### ⌨️ Keyboard Shortcuts
+* Navigate like a pro using single-key shortcuts (`N` for new problem, `D` for dashboard, `P` for problems, `?` for help modal).
+
+---
+
+## 🏗️ Architecture & Tech Stack
+
+```mermaid
+graph TD
+    Client["React 19 SPA (Vite + Tailwind CSS v4)"]
+    Router["Hash-based Routing & Modal Deep Links"]
+    State["Custom Hooks (useData, useTheme, useShortcuts)"]
+    
+    API["Express.js REST API"]
+    Auth["JWT Authentication & bcrypt"]
+    DB[(MongoDB Atlas / Local)]
+    
+    Client --> Router
+    Router --> State
+    State -->|HTTP Requests| API
+    API --> Auth
+    Auth --> DB
+```
+
+### Frontend
+* **Core**: [React 19](https://react.dev/), [Vite 6](https://vitejs.dev/)
+* **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+* **Icons**: [Lucide React](https://lucide.dev/)
+* **Effects**: [canvas-confetti](https://www.npmjs.com/package/canvas-confetti)
+
+### Backend
+* **Runtime**: [Node.js](https://nodejs.org/) (v18+)
+* **Framework**: [Express.js](https://expressjs.com/)
+* **Database & ODM**: [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/)
+* **Security**: JSON Web Tokens (`jsonwebtoken`), password hashing (`bcryptjs`), CORS (`cors`), environment configs (`dotenv`)
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-* [Node.js](https://nodejs.org/) installed on your machine.
-* [MongoDB](https://www.mongodb.com/) server running locally or a MongoDB Atlas URI connection string.
+Make sure you have the following installed:
+* [Node.js](https://nodejs.org/) (v18.0.0 or higher)
+* [npm](https://www.npmjs.com/) (v9.0.0 or higher)
+* [MongoDB](https://www.mongodb.com/try/download/community) installed locally or a [MongoDB Atlas](https://www.mongodb.com/atlas) connection URI.
 
-### Repository Structure
-```
-├── backend/          # Node.js Express server code & database models
-├── frontend/         # React SPA client code built with Vite
-├── package.json      # Main root workspace package scripts config
-├── README.md         # Documentation
-└── .gitignore        # Excluded folder/file patterns for Git version control
-```
+---
 
-### Installation & Local Setup
-
-#### 1. Clone the repository
+### Step 1: Clone the Repository
 ```bash
 git clone https://github.com/rahulkamti11/DSA-Tracker-MERN.git
 cd DSA-Tracker-MERN
 ```
 
-#### 2. Configure Environment Variables
+---
 
-**Backend (`backend/.env`)**:
-Create a `.env` file in the `backend/` folder matching the `.env.example` template:
-```env
+### Step 2: Configure Environment Variables
+
+#### Backend Configuration
+Create a `.env` file inside the `backend/` directory:
+```bash
+# backend/.env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/dsa-tracker
-JWT_SECRET=your_super_secret_jwt_key
+JWT_SECRET=your_super_secret_jwt_random_key_here
 ```
 
-**Frontend (`frontend/.env`)**:
-Create a `.env` file in the `frontend/` folder matching the `.env.example` template:
-```env
+#### Frontend Configuration
+Create a `.env` file inside the `frontend/` directory:
+```bash
+# frontend/.env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-#### 3. Install Dependencies & Run
+---
 
-You can choose to manage both frontend and backend either from the **root workspace directory** using the root `package.json` automation scripts, or **individually** inside their respective directories.
+### Step 3: Install Dependencies & Run
 
-##### Option A: Running from Root (Automated)
-Run these commands from the root directory:
-* **Install all dependencies** (installs node modules for both backend and frontend):
-  ```bash
-  npm run install-all
-  ```
-* **Run both services concurrently** (opens separate command shell windows to boot both frontend and backend development servers concurrently):
-  ```bash
-  npm run dev
-  ```
+#### Option A: One-Command Root Launch (Recommended)
+You can install and run both frontend and backend concurrently from the root directory:
 
-##### Option B: Running Directories Individually (Manual)
-If you prefer running frontend and backend separately in different terminal tabs:
-* **Backend**:
-  ```bash
-  cd backend
-  npm install
-  npm run dev
-  ```
-* **Frontend**:
-  ```bash
-  cd frontend
-  npm install
-  npm run dev
-  ```
+```bash
+# Install dependencies for both frontend and backend
+npm run install-all
 
-Open your browser and navigate to `http://localhost:5173`.
+# Start both backend and frontend concurrently
+npm run dev
+```
+
+#### Option B: Individual Service Launch
+If you prefer running frontend and backend in separate terminal windows:
+
+**Terminal 1 (Backend)**:
+```bash
+cd backend
+npm install
+npm run dev
+# Server runs on http://localhost:5000
+```
+
+**Terminal 2 (Frontend)**:
+```bash
+cd frontend
+npm install
+npm run dev
+# Vite runs on http://localhost:5173
+```
+
+Now open [http://localhost:5173](http://localhost:5173) in your browser!
 
 ---
 
-## 🛡️ API Endpoints
+## ⌨️ Keyboard Shortcuts
 
-### Authentication
-* `POST /api/auth/register` - Create a new user account.
-* `POST /api/auth/login` - Authenticate user credentials and return a token.
-* `GET /api/auth/profile` - Retrieve user profile and activity.
-* `POST /api/auth/activity` - Increment submissions and update the heatmap.
+Speed up your workflow without taking your hands off the keyboard:
 
-### Problems
-* `GET /api/problems` - Fetch all problems.
-* `POST /api/problems` - Log a new solved question.
-* `PUT /api/problems/:id` - Edit details (name, difficulty, tags, notes).
-* `DELETE /api/problems/:id` - Permanently delete from trash.
-* `PUT /api/problems/:id/trash` - Move problem to recycle bin or restore it.
-* `DELETE /api/problems/trash/empty` - Permanent empty trash cleanup.
+| Key | Action |
+| :---: | :--- |
+| <kbd>N</kbd> | Open **Add New Problem** modal |
+| <kbd>D</kbd> | Jump to **Dashboard** |
+| <kbd>P</kbd> | Jump to **Problem Log** |
+| <kbd>R</kbd> | Jump to **Review Queue** |
+| <kbd>C</kbd> | Jump to **Collections** |
+| <kbd>T</kbd> | Jump to **Topics** |
+| <kbd>K</kbd> | Jump to **Notes Knowledge Base** |
+| <kbd>?</kbd> | Open **Keyboard Shortcuts** modal |
+| <kbd>Esc</kbd> | Close any open modal or dialog |
 
-### Collections
-* `GET /api/collections` - Fetch all user lists.
-* `POST /api/collections` - Create a custom collection list (with description and color styling).
-* `DELETE /api/collections/:id` - Delete a collection.
+---
+
+## 🛡️ API Reference
+
+### Authentication Endpoints
+| Method | Endpoint | Description | Protected |
+| :--- | :--- | :--- | :---: |
+| `POST` | `/api/auth/register` | Register a new user | ❌ |
+| `POST` | `/api/auth/login` | Authenticate user & issue JWT | ❌ |
+| `GET` | `/api/auth/profile` | Get current user profile & heatmap | ✅ |
+| `POST` | `/api/auth/activity` | Record daily submission & update streak | ✅ |
+
+### Problems Endpoints
+| Method | Endpoint | Description | Protected |
+| :--- | :--- | :--- | :---: |
+| `GET` | `/api/problems` | Retrieve all active problems | ✅ |
+| `POST` | `/api/problems` | Create and log a new problem | ✅ |
+| `PUT` | `/api/problems/:id` | Update problem details or SRS status | ✅ |
+| `PUT` | `/api/problems/:id/trash` | Soft delete (move to trash) or restore | ✅ |
+| `DELETE` | `/api/problems/:id` | Permanently delete a problem | ✅ |
+| `DELETE` | `/api/problems/trash/empty`| Permanently purge all trashed problems | ✅ |
+
+### Collections Endpoints
+| Method | Endpoint | Description | Protected |
+| :--- | :--- | :--- | :---: |
+| `GET` | `/api/collections` | Retrieve all curated collections | ✅ |
+| `POST` | `/api/collections` | Create a new custom collection list | ✅ |
+| `DELETE` | `/api/collections/:id` | Delete a collection | ✅ |
+
+---
+
+## 📁 Project Directory Structure
+
+```text
+DSA-Tracker-MERN/
+├── backend/                  # Node.js + Express API
+│   ├── config/               # Database connection setup
+│   ├── middleware/           # JWT auth verification middleware
+│   ├── models/               # Mongoose schemas (User, Problem, Collection)
+│   ├── routes/               # API route definitions (auth, problems, collections)
+│   └── server.js             # Express entry point
+├── frontend/                 # React 19 Client SPA
+│   ├── src/
+│   │   ├── components/       # UI components (Dashboard, ProblemList, ReviewQueue, Modals)
+│   │   ├── hooks/            # Custom hooks (useData, useTheme, useShortcuts)
+│   │   ├── utils/            # Helper utilities (spaced repetition math, formatters)
+│   │   ├── App.jsx           # Master view container & hash router
+│   │   └── main.jsx          # React DOM root
+│   ├── index.html            # HTML template with dark theme background
+│   └── vite.config.js        # Vite build & plugin settings
+├── docs/
+│   └── screenshots/          # High-resolution application screenshots
+├── package.json              # Root workspace scripts (concurrent launch)
+├── README.md                 # Complete project documentation
+└── .gitignore                # Git ignore patterns
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'feat: add AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
+
+---
+
+<div align="center">
+
+Crafted with ❤️ by [Rahul Kamti](https://github.com/rahulkamti11)
+
+**Star ⭐ this repository if you find it helpful for your interview prep!**
+
+</div>
