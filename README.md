@@ -108,10 +108,18 @@ Organize by curated roadmaps (Blind 75, NeetCode 150) and retain algorithmic ins
 ### 🛡️ Dual Guest & Cloud Modes
 * **Guest Mode**: Start tracking immediately out-of-the-box with instant client-side state — zero login required.
 * **Cloud Sync**: Create a secure account (JWT + bcrypt) to persist and sync your preparation across all devices.
+* **Profile Management**: Customize display name, handle, and password with real-time length limit validation (20 chars for name/username, 10 chars for password) and password visibility eye toggles.
+
+### 🌐 100% Offline Persistence & Local Storage Engine
+* **Zero Backend Dependency**: Track DSA problems even when the backend server or MongoDB is completely offline.
+* **Automatic Local Storage Sync**: Every problem, curated list, recycled item, and heatmap activity automatically persists to browser `localStorage`.
+* **Real-Time Offline Status Beacon**: An ambient, slowly blinking top-right notification banner alerts you when the backend is unreachable while confirming that all your data remains safely stored locally.
+* **Static Deployment Ready**: Run as a pure standalone client on **GitHub Pages**, **Vercel**, or **Netlify**.
 
 ### 💾 Data Portability & Safety
 * **Import / Export**: Backup or migrate your entire problem library anytime with one-click **JSON** or **CSV** export.
 * **Recycle Bin (Trash)**: Soft-delete protection allows recovering accidentally removed problems or permanently purging them.
+* **Logout Confirmation**: Interactive confirmation modal prevents accidental session terminations.
 
 ### ⌨️ Keyboard Shortcuts
 * Navigate like a pro using single-key shortcuts (`N` for new problem, `D` for dashboard, `P` for problems, `?` for help modal).
@@ -125,6 +133,7 @@ graph TD
     Client["React 19 SPA (Vite + Tailwind CSS v4)"]
     Router["Hash-based Routing & Modal Deep Links"]
     State["Custom Hooks (useData, useTheme, useShortcuts)"]
+    LocalStorage[("Browser Local Storage (Offline Engine)")]
     
     API["Express.js REST API"]
     Auth["JWT Authentication & bcrypt"]
@@ -132,7 +141,8 @@ graph TD
     
     Client --> Router
     Router --> State
-    State -->|HTTP Requests| API
+    State <-->|Auto Sync / Offline Persistence| LocalStorage
+    State -->|HTTP Requests / Cloud Sync| API
     API --> Auth
     Auth --> DB
 ```
