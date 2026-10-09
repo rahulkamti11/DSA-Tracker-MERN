@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { guestLogin, authenticate, syncGuestData } from '../services/auth.service.js';
+import { guestLogin, authenticate, syncGuestData, updateProfile } from '../services/auth.service.js';
 
 export default function useAuth() {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('dsa_session') || 'null'));
@@ -64,6 +64,33 @@ export default function useAuth() {
     setUser(null);
   };
 
+  const handleUpdateProfile = async ({ name, username, password }) => {
+    if (user?.isGuest || user?.username === 'guest') {
+      throw new Error('Guest profile cannot be modified. Please log in or register an account.');
+    }
+
+    const res = await updateProfile({
+      token: user?.token,
+      name,
+      username,
+      password: password || undefined,
+    });
+
+    const updatedUser = {
+      ...user,
+      username: res.user.username,
+      name: res.user.name,
+      token: res.token || user.token,
+    };
+    setUser(updatedUser);
+    localStorage.setItem('dsa_session', JSON.stringify(updatedUser));
+    return {
+      success: true,
+      message: res.message || 'Profile updated successfully!',
+      user: updatedUser,
+    };
+  };
+
   return {
     user,
     setUser,
@@ -77,5 +104,6 @@ export default function useAuth() {
     setSyncProgress,
     handleAuth,
     handleLogout,
+    handleUpdateProfile,
   };
 }

@@ -14,6 +14,13 @@ export const fetchProfile = (token) =>
     headers: buildAuthHeaders(token, false),
   });
 
+export const updateProfile = ({ token, name, username, password }) =>
+  apiRequest('/auth/me', {
+    method: 'PUT',
+    headers: buildAuthHeaders(token),
+    body: JSON.stringify({ name, username, password }),
+  });
+
 export const logActivity = (token) =>
   apiRequest('/auth/activity', {
     method: 'POST',

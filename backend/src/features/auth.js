@@ -38,7 +38,20 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'Please enter all fields.' });
     }
 
-    const existingUser = await User.findOne({ username });
+    if (name.trim().length > 20) {
+      return res.status(400).json({ message: 'Display Name cannot exceed 20 characters.' });
+    }
+    if (username.trim().length > 20) {
+      return res.status(400).json({ message: 'Username cannot exceed 20 characters.' });
+    }
+    if (password.length > 10) {
+      return res.status(400).json({ message: 'Password cannot exceed 10 characters.' });
+    }
+    if (password.length < 4) {
+      return res.status(400).json({ message: 'Password must be at least 4 characters long.' });
+    }
+
+    const existingUser = await User.findOne({ username: username.toLowerCase().trim() });
     if (existingUser) {
       return res.status(400).json({ message: 'Username already exists.' });
     }
@@ -83,7 +96,11 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Please enter all fields.' });
     }
 
-    const user = await User.findOne({ username });
+    if (username.length > 20 || password.length > 10) {
+      return res.status(400).json({ message: 'Invalid credentials. Username max 20, password max 10 characters.' });
+    }
+
+    const user = await User.findOne({ username: username.toLowerCase().trim() });
     if (!user) {
       return res.status(400).json({ message: 'No account with this username has been registered.' });
     }
@@ -129,6 +146,64 @@ router.get('/me', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update User Profile
+router.put('/me', auth, async (req, res) => {
+  try {
+    const { name, username, password } = req.body;
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Guest Profile cannot be modified
+    if (user.username === 'guest') {
+      return res.status(403).json({ message: 'Guest profile cannot be modified. Please log in or register an account.' });
+    }
+
+    // Registered user profile update
+    if (name && name.trim()) {
+      if (name.trim().length > 20) {
+        return res.status(400).json({ message: 'Display Name cannot exceed 20 characters.' });
+      }
+      user.name = name.trim();
+    }
+
+    if (username && username.trim() && username.toLowerCase().trim() !== user.username) {
+      const trimmedUser = username.toLowerCase().trim();
+      if (trimmedUser.length > 20) {
+        return res.status(400).json({ message: 'Username cannot exceed 20 characters.' });
+      }
+      const existing = await User.findOne({ username: trimmedUser });
+      if (existing && existing._id.toString() !== user._id.toString()) {
+        return res.status(400).json({ message: 'Username is already taken by another account.' });
+      }
+      user.username = trimmedUser;
+    }
+
+    if (password && password.trim()) {
+      if (password.trim().length < 4 || password.trim().length > 10) {
+        return res.status(400).json({ message: 'Password must be between 4 and 10 characters.' });
+      }
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password.trim(), salt);
+    }
+
+    const updatedUser = await user.save();
+    const token = jwt.sign({ id: updatedUser._id }, env.jwtSecret);
+
+    res.json({
+      token,
+      user: {
+        id: updatedUser._id,
+        username: updatedUser.username,
+        name: updatedUser.name,
+        activity: updatedUser.activity
+      },
+      message: 'Profile updated successfully.'
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
