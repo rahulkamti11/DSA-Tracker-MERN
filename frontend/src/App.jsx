@@ -67,6 +67,7 @@ export default function App() {
     setSyncProgress,
     handleAuth,
     handleLogout,
+    handleUpdateProfile,
   } = useAuth();
 
   const {
@@ -215,6 +216,19 @@ export default function App() {
     }
   }, []);
 
+  const handleLogoutClick = () => {
+    setConfirmModal({
+      open: true,
+      title: 'Log Out',
+      message: 'Are you sure you want to log out of your account?',
+      confirmText: 'Logout',
+      isDestructive: true,
+      onConfirm: () => {
+        handleLogout();
+      },
+    });
+  };
+
   // CRUD Handler wraps
   const handleSaveProblem = (e) => {
     if (e && e.preventDefault) e.preventDefault();
@@ -339,12 +353,12 @@ export default function App() {
         sidebar={(
           <Sidebar sidebarCollapsed={sidebarCollapsed} sidebarOpen={sidebarOpen}>
             <div className={`h-[73px] flex items-center border-b border-slate-200 dark:border-slate-800 transition-all duration-300 shrink-0 ${
-              sidebarCollapsed ? 'justify-center px-2' : 'justify-between px-6'
+              sidebarCollapsed ? 'justify-center px-2' : 'px-3'
             }`}>
               {sidebarCollapsed ? (
                 <Tooltip content="Expand sidebar" className="relative flex w-full justify-center">
                   <button
-                    className="w-10 h-10 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-500 dark:text-sky-400 border border-sky-500/20 flex items-center justify-center font-mono font-black text-xs transition-all hover:scale-105 active:scale-95 shadow-xs mx-auto"
+                    className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center font-mono font-bold text-xs transition-all hover:scale-105 active:scale-95 shadow-xs mx-auto cursor-pointer"
                     onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                     title="Expand sidebar"
                   >
@@ -352,23 +366,25 @@ export default function App() {
                   </button>
                 </Tooltip>
               ) : (
-                <>
-                  <div className="flex items-center gap-2 min-w-0">
-                    <h1 className="text-lg font-bold text-sky-500 dark:text-sky-400 font-mono tracking-tight">&lt;DSA Tracker/&gt;</h1>
-                  </div>
-                  <div className="flex items-center gap-1 shrink-0">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-3 min-w-0">
                     <Tooltip content="Collapse sidebar">
                       <button
-                        className="hidden md:flex items-center justify-center w-8 h-8 rounded-lg text-sky-500 dark:text-sky-400 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/20 font-mono font-black text-xs transition-all hover:scale-105 active:scale-95"
+                        className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/80 font-mono font-bold text-xs flex items-center justify-center shrink-0 transition-all hover:scale-105 active:scale-95 cursor-pointer ml-0.5"
                         onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                         title="Collapse sidebar"
                       >
                         &lt;/&gt;
                       </button>
                     </Tooltip>
-                    <button className="md:hidden text-slate-400 hover:text-slate-200 p-1" onClick={() => setSidebarOpen(false)}><X size={20} /></button>
+                    <span className="text-[21px] font-black tracking-wide text-slate-900 dark:text-slate-100 uppercase truncate">
+                      DSA TRACKER
+                    </span>
                   </div>
-                </>
+                  <button className="md:hidden text-slate-400 hover:text-slate-200 p-1 cursor-pointer" onClick={() => setSidebarOpen(false)}>
+                    <X size={20} />
+                  </button>
+                </div>
               )}
             </div>
             <nav className="p-3 space-y-1 overflow-y-auto flex-1 custom-scrollbar">
@@ -431,8 +447,8 @@ export default function App() {
               <button onClick={() => openAddModal()} className="bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold px-3 py-2 md:px-4 md:py-2 rounded-lg text-sm flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_20px_rgba(56,189,248,0.5)]"><Plus size={16} /> <span className="hidden sm:inline">Add Problem</span></button>
               
               {(!user || user.isGuest) ? 
-                <button onClick={() => setAuthModal(true)} className="flex items-center gap-2 text-sm text-sky-400 bg-sky-500/10 border border-sky-500/20 px-3 py-2 rounded-lg hover:bg-sky-500/20 transition-colors"><LogIn size={16}/> <span className="hidden sm:inline">Login / Register</span></button> :
-                <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-rose-400 bg-rose-500/10 border border-rose-500/20 px-3 py-2 rounded-lg hover:bg-rose-500/20 transition-colors"><LogOut size={16}/> <span className="hidden sm:inline">Logout</span></button>
+                <button onClick={() => setAuthModal(true)} className="flex items-center gap-2 text-sm text-sky-400 bg-sky-500/10 border border-sky-500/20 px-3 py-2 rounded-lg hover:bg-sky-500/20 transition-colors cursor-pointer"><LogIn size={16}/> <span className="hidden sm:inline">Login / Register</span></button> :
+                <button onClick={handleLogoutClick} className="flex items-center gap-2 text-sm text-rose-400 bg-rose-500/10 border border-rose-500/20 px-3 py-2 rounded-lg hover:bg-rose-500/20 transition-colors cursor-pointer"><LogOut size={16}/> <span className="hidden sm:inline">Logout</span></button>
               }
             </div>
           </Topbar>
@@ -491,7 +507,13 @@ export default function App() {
         <RecycleTab active={view === 'trash'} trash={trash} emptyTrash={handleEmptyTrash} restoreProblem={restoreProblem} deletePermanent={handleDeletePermanent} />
 
         {/* VIEW: SETTINGS */}
-        <SettingsTab key={user?.username || 'guest'} active={view === 'settings'} user={user} />
+        <SettingsTab
+          key={user?.username || 'guest'}
+          active={view === 'settings'}
+          user={user}
+          onUpdateProfile={handleUpdateProfile}
+          openAuthModal={() => setAuthModal(true)}
+        />
       </Shell>
 
       <ProblemFormDialog
