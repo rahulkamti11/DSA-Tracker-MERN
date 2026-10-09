@@ -42,6 +42,8 @@ import ProblemDetailDialog from './components/dialogs/ProblemDetailDialog.jsx';
 
 import NavItem from './components/navigation/NavItem.jsx';
 import Tooltip from './components/ui/Tooltip.jsx';
+import OfflineToast from './components/ui/OfflineToast.jsx';
+import { checkBackendHealth } from './services/api.js';
 
 import useAuth from './hooks/useAuth.js';
 import useData from './hooks/useData.js';
@@ -70,6 +72,10 @@ export default function App() {
     handleUpdateProfile,
   } = useAuth();
 
+  // Backend Connectivity & Offline Detection States
+  const [isOffline, setIsOffline] = useState(false);
+  const [offlineToastDismissed, setOfflineToastDismissed] = useState(false);
+
   const {
     problems,
     setProblems,
@@ -86,7 +92,7 @@ export default function App() {
     toggleStar,
     addCollection,
     deleteCollection,
-  } = useData(user);
+  } = useData(user, setIsOffline);
 
   // Layout and View States
   const [view, setViewState] = useState(() => {
@@ -126,6 +132,18 @@ export default function App() {
   const [noteModal, setNoteModal] = useState(null);
   const [confirmModal, setConfirmModal] = useState({ open: false, title: '', message: '', onConfirm: null });
   const [detailModal, setDetailModal] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    checkBackendHealth().then((healthy) => {
+      if (active) {
+        setIsOffline(!healthy);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // Add/Edit Problem Dialog States
   const [probModal, setProbModal] = useState({ open: false, id: null });
@@ -586,6 +604,10 @@ export default function App() {
         getPlatformInfo={getPlatformInfo}
         getRealUrl={getRealUrl}
       />
+
+      {isOffline && !offlineToastDismissed && (
+        <OfflineToast onClose={() => setOfflineToastDismissed(true)} />
+      )}
     </>
   );
 }

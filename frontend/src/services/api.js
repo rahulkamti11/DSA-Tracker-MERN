@@ -24,3 +24,19 @@ export const apiRequest = async (path, options = {}) => {
 
   return data;
 };
+
+export const checkBackendHealth = async () => {
+  try {
+    const baseUrl = API_URL.replace(/\/api\/?$/, '');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch(`${baseUrl}/`, {
+      method: 'GET',
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+    return res.status === 200;
+  } catch {
+    return false;
+  }
+};
