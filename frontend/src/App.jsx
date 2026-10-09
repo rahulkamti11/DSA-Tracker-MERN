@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   LayoutDashboard,
   ListTodo,
@@ -88,10 +88,28 @@ export default function App() {
   } = useData(user);
 
   // Layout and View States
-  const [view, setView] = useState('problems');
+  const [view, setViewState] = useState(() => {
+    const hash = window.location.hash.replace('#', '');
+    const validViews = ['dashboard', 'problems', 'review', 'collections', 'topics', 'notes', 'trash', 'settings'];
+    return validViews.includes(hash) ? hash : 'dashboard';
+  });
+  const setView = (v) => {
+    setViewState(v);
+    window.location.hash = v;
+  };
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      const validViews = ['dashboard', 'problems', 'review', 'collections', 'topics', 'notes', 'trash', 'settings'];
+      if (validViews.includes(hash)) setViewState(hash);
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   // Selection state
   const [selectedCollection, setSelectedCollection] = useState(null);
@@ -129,10 +147,13 @@ export default function App() {
   // Reset view state when changing user
   const [prevUser, setPrevUser] = useState(user?.username);
   if (user?.username !== prevUser) {
+    const hadPrevious = Boolean(prevUser);
     setPrevUser(user?.username);
     setSelectedCollection(null);
     setSelectedTopic(null);
-    setView('problems');
+    if (hadPrevious) {
+      setView('problems');
+    }
   }
 
   // Keyboard Shortcuts Hook
@@ -184,6 +205,15 @@ export default function App() {
     setAddFormTab('details');
     setProbModal({ open: true, id });
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('modal') === 'add') {
+      openAddModal();
+    } else if (params.get('modal') === 'shortcuts') {
+      setShortcutsModal(true);
+    }
+  }, []);
 
   // CRUD Handler wraps
   const handleSaveProblem = (e) => {

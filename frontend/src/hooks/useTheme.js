@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 
 export default function useTheme() {
   const [themeMode, setThemeModeState] = useState(() => {
-    return localStorage.getItem('dsa_theme') || 'dark';
+    const urlTheme = new URLSearchParams(window.location.search).get('theme');
+    return urlTheme || localStorage.getItem('dsa_theme') || 'dark';
   });
 
   const applyTheme = useCallback((mode) => {
