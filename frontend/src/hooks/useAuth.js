@@ -15,7 +15,10 @@ export default function useAuth() {
         .then(data => {
           setUser({ username: data.user.username, name: data.user.name, token: data.token, isGuest: true });
         })
-        .catch(err => console.error('Error logging in as guest:', err));
+        .catch(err => {
+          console.warn('Backend offline, initialized offline guest session:', err.message);
+          setUser({ username: 'guest', name: 'Guest User', token: null, isGuest: true });
+        });
     }
   }, [user]);
 
